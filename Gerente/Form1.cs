@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations.Model;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
@@ -35,32 +36,50 @@ namespace Gerente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string arroba = "@";
+           string arroba = "@";
             string com = ".com";
            
                 Connection con = new Connection();
                 con.conectar();
                 string a = email.Text;
                 string b = senha.Text;
+            bool certo = false;
 
             if (email.Text.Contains(arroba) && email.Text.Contains(com))
             {
                 try
                 {
-                    string sqlsearch = "SELECT * FROM Login WHERE Email = " + email.Text + " AND Senha =" + senha.Text + "";
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlsearch, con.sq);
-                    this.Hide();
-                    Home h = new Home();
-                    h.Show();
+                    int z = 0;
 
-                }
-                catch 
+                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + email.Text + "' AND Senha = '" + senha.Text + "' ";
+                    SQLiteDataReader dr;
+                    SQLiteCommand bou = new SQLiteCommand(sql,con.sq);
+                    dr = bou.ExecuteReader();
+                   
+                  while(dr.Read())
+
+                    {
+                        z++;
+                    }
+                  if(z==1)
+                    {
+                        Home h = new Home();
+                        this.Hide();
+                        h.Show();
+                    }
+                  if(z==0)
+                    {
+                        MessageBox.Show("Dados Incorretos!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                    }
+
+                    }
+                catch (Exception E)
                 {
-                    MessageBox.Show("Email não encontrado!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(E.Message.ToString());
+                    certo = false;
                 }
-
+                
             }
-            else
+           else
             {
                 MessageBox.Show("Digite um email válido!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
