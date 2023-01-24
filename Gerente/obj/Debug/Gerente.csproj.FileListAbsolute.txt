@@ -20,3 +20,4 @@ C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.exe
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.pdb
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Funcionario.resources
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Home.resources
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Contas.resources

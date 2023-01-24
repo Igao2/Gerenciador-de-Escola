@@ -24,5 +24,13 @@ namespace Gerente
             this.panel1.Controls.Add(func);
             func.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            Contas contas = new Contas() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true }; ;
+            this.panel1.Controls.Add(contas);
+            contas.Show();
+        }
     }
 }
