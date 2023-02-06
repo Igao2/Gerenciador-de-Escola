@@ -32,5 +32,21 @@ namespace Gerente
             this.panel1.Controls.Add(contas);
             contas.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            Calendario cal = new Calendario() { Dock = DockStyle.Fill,TopLevel = false, TopMost = true }; ;
+            this.panel1.Controls.Add(cal);
+            cal.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            Horario hor = new Horario() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true }; ;
+            this.panel1.Controls.Add(hor);
+            hor.Show();
+        }
     }
 }

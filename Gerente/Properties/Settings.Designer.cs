@@ -46,5 +46,17 @@ namespace Gerente.Properties {
                 this["Pagpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Eventos {
+            get {
+                return ((string)(this["Eventos"]));
+            }
+            set {
+                this["Eventos"] = value;
+            }
+        }
     }
 }

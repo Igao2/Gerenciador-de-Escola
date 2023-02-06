@@ -21,3 +21,13 @@ C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.pdb
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Funcionario.resources
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Home.resources
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Contas.resources
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Calendario.resources
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Xceed.Document.NET.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Xceed.Words.NET.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Horario.resources
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.xml
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
