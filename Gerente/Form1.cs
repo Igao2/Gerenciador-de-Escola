@@ -44,7 +44,8 @@ namespace Gerente
                 string a = email.Text;
                 string b = senha.Text;
             bool certo = false;
-
+        if(email.Text != "" && senha.Text !="")
+        {
             if (email.Text.Contains(arroba) && email.Text.Contains(com))
             {
                 try
@@ -83,6 +84,12 @@ namespace Gerente
             {
                 MessageBox.Show("Digite um email válido!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
+          }
+          else 
+          {
+          MessageBox.Show("Preencha todos os campos","Alerta do Sistema",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          }
         
     }
 
