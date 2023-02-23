@@ -11,7 +11,6 @@ C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EntityFramework.SqlServe
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\System.Data.SQLite.xml
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.csproj.AssemblyReference.cache
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.csproj.SuggestedBindingRedirects.cache
-C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Form1.resources
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Properties.Resources.resources
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.csproj.GenerateResource.cache
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.csproj.CoreCompileInputs.cache
@@ -31,3 +30,4 @@ C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.System.Drawing.dl
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.xml
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Login.resources

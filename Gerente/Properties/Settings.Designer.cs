@@ -58,5 +58,17 @@ namespace Gerente.Properties {
                 this["Eventos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Matérias {
+            get {
+                return ((string)(this["Matérias"]));
+            }
+            set {
+                this["Matérias"] = value;
+            }
+        }
     }
 }

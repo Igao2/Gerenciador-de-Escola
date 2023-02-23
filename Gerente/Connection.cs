@@ -9,7 +9,7 @@ namespace Gerente
 {
      class Connection
     {
-        public SQLiteConnection sq = new SQLiteConnection("Data Source = C:\\Users\\Igor\\Desktop\\Gerente Escolar\\Gerente\\GEBD.db");
+        public SQLiteConnection sq = new SQLiteConnection("Data Source = GEBD.db");
 
         public void conectar()
         {
