@@ -23,16 +23,32 @@ namespace Gerente
         }
         int dia = 0;
         int contador = 0;
-        List<Tuple<string, string, string, string, string,string,string>> segunda = new List<Tuple<string, string, string, string, string, string,string>>();
-        List<Tuple<string, string, string, string, string,string,string>> terca = new List<Tuple<string, string, string, string, string,string,string>>();
-        List<Tuple<string, string, string, string, string,string,string>> quarta = new List<Tuple<string, string, string, string, string,string,string>>();
-        List<Tuple<string, string, string, string, string,string,string>> quinta = new List<Tuple<string, string, string, string, string,string,string>>();
+        List<Tuple<string, string, string, string, string, string, string>> segunda = new List<Tuple<string, string, string, string, string, string, string>>();
+        List<Tuple<string, string, string, string, string, string, string>> terca = new List<Tuple<string, string, string, string, string, string, string>>();
+        List<Tuple<string, string, string, string, string, string, string>> quarta = new List<Tuple<string, string, string, string, string, string, string>>();
+        List<Tuple<string, string, string, string, string, string, string>> quinta = new List<Tuple<string, string, string, string, string, string, string>>();
         List<Tuple<string, string, string, string, string, string, string>> sexta = new List<Tuple<string, string, string, string, string, string, string>>();
-        List<Tuple<string, string, string, string, string,string,string>> horario = new List<Tuple<string, string, string, string, string,string,string>>();
+        List<Tuple<string, string, string, string, string, string, string>> horario = new List<Tuple<string, string, string, string, string, string, string>>();
 
         private void Horario_Load(object sender, EventArgs e)
         {
-
+            string a = "";
+             if(Properties.Settings.Default.Matérias != "")
+            {
+                a = Properties.Settings.Default.Matérias;
+            }
+                
+            string[] b = a.Split(',');
+            for (int i = 0; i < b.Length; i++)
+            {
+                Matérias.Items.Add(b[i]);
+                Matérias2.Items.Add(b[i]);
+                Matérias3.Items.Add(b[i]);
+                Matérias4.Items.Add(b[i]);
+                Matérias5.Items.Add(b[i]);
+                Matérias6.Items.Add(b[i]);
+                Matérias7.Items.Add(b[i]);
+            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -62,7 +78,7 @@ namespace Gerente
 
         private void toolStripTextBox5_Click(object sender, EventArgs e)
         {
-                    }
+        }
 
         private void Segunda_Click(object sender, EventArgs e)
         {
@@ -134,11 +150,7 @@ namespace Gerente
                 maskedTextBox5.Clear();
                 textBox1.Clear();
                 textBox2.Clear();
-                textBox3.Clear();
-                textBox4.Clear();
-                textBox5.Clear();
-                textBox6.Clear();
-                textBox7.Clear();
+               
                 segunda.RemoveAt(0);
                 terca.RemoveAt(0);
                 quarta.RemoveAt(0);
@@ -188,34 +200,34 @@ namespace Gerente
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            
-            if(dia == 2)
+
+
+            if (dia == 2)
             {
-                segunda.Add(Tuple.Create(textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text,textBox8.Text,textBox9.Text));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text,maskedTextBox6.Text,maskedTextBox7.Text));
+                segunda.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(),Matérias5.SelectedItem.ToString(),Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 3)
             {
-                terca.Add(Tuple.Create(textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text));
+                terca.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 4)
             {
-                quarta.Add(Tuple.Create(textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text));
+                quarta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 5)
             {
-                quinta.Add(Tuple.Create(textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text));
+                quinta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 6)
             {
-                sexta.Add(Tuple.Create(textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox7.Text, textBox8.Text, textBox9.Text));
+                sexta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
-           
+
 
         }
 
@@ -341,17 +353,13 @@ namespace Gerente
                     maskedTextBox5.Clear();
                     textBox1.Clear();
                     textBox2.Clear();
-                    textBox3.Clear();
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    textBox6.Clear();
-                    textBox7.Clear();
+                    
                     segunda.RemoveAt(0);
                     terca.RemoveAt(0);
                     quarta.RemoveAt(0);
                     quinta.RemoveAt(0);
                     sexta.RemoveAt(0);
-                    for(int i = 0; i < horario.Count;i++)
+                    for (int i = 0; i < horario.Count; i++)
                     {
                         horario.RemoveAt(i);
                     }
@@ -371,6 +379,40 @@ namespace Gerente
         }
 
         private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Matérias.Items.Add(textBox10.Text);
+            Matérias2.Items.Add(textBox10.Text);
+            Matérias3.Items.Add(textBox10.Text);
+            Matérias4.Items.Add(textBox10.Text);
+            Matérias5.Items.Add(textBox10.Text);
+            Matérias6.Items.Add(textBox10.Text);
+            Matérias7.Items.Add(textBox10.Text);
+            if (Properties.Settings.Default.Matérias == "")
+            {
+                Properties.Settings.Default.Matérias = textBox10.Text;
+                Properties.Settings.Default.Save();
+                textBox10.Clear();
+            }
+            
+            else
+            {
+                Properties.Settings.Default.Matérias = Properties.Settings.Default.Matérias + "," + textBox10.Text;
+                Properties.Settings.Default.Save();
+                textBox10.Clear();
+            }
+        }
+
+        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
         {
 
         }

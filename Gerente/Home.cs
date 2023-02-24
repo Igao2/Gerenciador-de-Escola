@@ -48,5 +48,17 @@ namespace Gerente
             this.panel1.Controls.Add(hor);
             hor.Show();
         }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+            label1.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
     }
 }

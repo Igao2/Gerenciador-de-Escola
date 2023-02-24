@@ -46,11 +46,6 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -60,12 +55,20 @@
             this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
             this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.maskedTextBox7 = new System.Windows.Forms.MaskedTextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.Matérias = new System.Windows.Forms.DomainUpDown();
+            this.Matérias2 = new System.Windows.Forms.DomainUpDown();
+            this.Matérias3 = new System.Windows.Forms.DomainUpDown();
+            this.Matérias4 = new System.Windows.Forms.DomainUpDown();
+            this.Matérias5 = new System.Windows.Forms.DomainUpDown();
+            this.Matérias6 = new System.Windows.Forms.DomainUpDown();
+            this.Matérias7 = new System.Windows.Forms.DomainUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +175,7 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(298, 158);
+            this.menuStrip1.Location = new System.Drawing.Point(343, 158);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.menuStrip1.Size = new System.Drawing.Size(44, 24);
@@ -226,44 +229,6 @@
             this.toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem6.Text = "Sexta";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(140, 173);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 18;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(140, 199);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 19;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(140, 225);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(140, 251);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 21;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(140, 277);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 22;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // label9
             // 
@@ -342,13 +307,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(140, 303);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 31;
-            // 
             // maskedTextBox6
             // 
             this.maskedTextBox6.Location = new System.Drawing.Point(57, 303);
@@ -369,13 +327,6 @@
             this.label10.Text = "6º";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(140, 329);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 34;
-            // 
             // maskedTextBox7
             // 
             this.maskedTextBox7.Location = new System.Drawing.Point(57, 329);
@@ -394,17 +345,108 @@
             this.label11.TabIndex = 36;
             this.label11.Text = "7º";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(506, 81);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(79, 49);
+            this.button4.TabIndex = 37;
+            this.button4.Text = "Cadastrar Matéria";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(506, 55);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 20);
+            this.textBox10.TabIndex = 38;
+            // 
+            // Matérias
+            // 
+            this.Matérias.Location = new System.Drawing.Point(159, 174);
+            this.Matérias.Name = "Matérias";
+            this.Matérias.Size = new System.Drawing.Size(120, 20);
+            this.Matérias.TabIndex = 40;
+            this.Matérias.Text = "Selecionar";
+            this.Matérias.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
+            // 
+            // Matérias2
+            // 
+            this.Matérias2.Location = new System.Drawing.Point(159, 199);
+            this.Matérias2.Name = "Matérias2";
+            this.Matérias2.Size = new System.Drawing.Size(120, 20);
+            this.Matérias2.TabIndex = 41;
+            this.Matérias2.Text = "Selecionar";
+            // 
+            // Matérias3
+            // 
+            this.Matérias3.Location = new System.Drawing.Point(159, 225);
+            this.Matérias3.Name = "Matérias3";
+            this.Matérias3.Size = new System.Drawing.Size(120, 20);
+            this.Matérias3.TabIndex = 42;
+            this.Matérias3.Text = "Selecionar";
+            // 
+            // Matérias4
+            // 
+            this.Matérias4.Location = new System.Drawing.Point(159, 251);
+            this.Matérias4.Name = "Matérias4";
+            this.Matérias4.Size = new System.Drawing.Size(120, 20);
+            this.Matérias4.TabIndex = 43;
+            this.Matérias4.Text = "Selecionar";
+            // 
+            // Matérias5
+            // 
+            this.Matérias5.Location = new System.Drawing.Point(159, 277);
+            this.Matérias5.Name = "Matérias5";
+            this.Matérias5.Size = new System.Drawing.Size(120, 20);
+            this.Matérias5.TabIndex = 45;
+            this.Matérias5.Text = "Selecionar";
+            // 
+            // Matérias6
+            // 
+            this.Matérias6.Location = new System.Drawing.Point(159, 304);
+            this.Matérias6.Name = "Matérias6";
+            this.Matérias6.Size = new System.Drawing.Size(120, 20);
+            this.Matérias6.TabIndex = 46;
+            this.Matérias6.Text = "Selecionar";
+            // 
+            // Matérias7
+            // 
+            this.Matérias7.Location = new System.Drawing.Point(159, 329);
+            this.Matérias7.Name = "Matérias7";
+            this.Matérias7.Size = new System.Drawing.Size(120, 20);
+            this.Matérias7.TabIndex = 47;
+            this.Matérias7.Text = "Selecionar";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(503, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(42, 13);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "Matéria";
+            // 
             // Horario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 545);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.Matérias7);
+            this.Controls.Add(this.Matérias6);
+            this.Controls.Add(this.Matérias5);
+            this.Controls.Add(this.Matérias4);
+            this.Controls.Add(this.Matérias3);
+            this.Controls.Add(this.Matérias2);
+            this.Controls.Add(this.Matérias);
+            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.maskedTextBox7);
-            this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.maskedTextBox6);
-            this.Controls.Add(this.textBox8);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.maskedTextBox5);
             this.Controls.Add(this.maskedTextBox4);
@@ -413,11 +455,6 @@
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -462,11 +499,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -476,11 +508,19 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox4;
         private System.Windows.Forms.MaskedTextBox maskedTextBox5;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.MaskedTextBox maskedTextBox6;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.MaskedTextBox maskedTextBox7;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.DomainUpDown Matérias;
+        private System.Windows.Forms.DomainUpDown Matérias2;
+        private System.Windows.Forms.DomainUpDown Matérias3;
+        private System.Windows.Forms.DomainUpDown Matérias4;
+        private System.Windows.Forms.DomainUpDown Matérias5;
+        private System.Windows.Forms.DomainUpDown Matérias6;
+        private System.Windows.Forms.DomainUpDown Matérias7;
+        private System.Windows.Forms.Label label12;
     }
 }

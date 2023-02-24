@@ -58,13 +58,36 @@ namespace Gerente
                 }
                     
             DateTime dt = new DateTime();
-                    dt =DateTime.Now.Date;
+                dt = DateTime.Now.Date;
                
                 if (listView1.Items[i].SubItems[2].Text == dt.ToShortDateString() && listView1.Items[i].SubItems[3].Text=="Pendente")
                 {
                     
                         richTextBox1.Text = richTextBox1.Text + "\n" + listView1.Items[i].Text;
                 }
+                string[] sla = listView1.Items[i].SubItems[2].Text.Split('/');
+                int dia = int.Parse(sla[0]);
+                int mes = int.Parse(sla[1]);
+                int ano = int.Parse(sla[2]);
+                DateTime dateTime = new DateTime(ano, mes, dia);
+                if (dt>=dateTime && listView1.Items[i].SubItems[3].Text == "Pago")
+                {
+                    try
+                    {
+                        string pago = "Pago";
+                        Connection con  = new Connection();
+                        con.conectar();
+                        string sql = "DELETE FROM Contas WHERE Vencimento = '" + listView1.Items[i].SubItems[2].Text +"'AND Status = '"+pago+"'";
+                        SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                        command.ExecuteNonQuery();
+                        listView1.Items.RemoveAt(i);
+                    }
+                    catch(Exception E)
+                    {
+                        MessageBox.Show(E.Message);
+                    }
+                }
+                
             }
 
 
@@ -176,6 +199,27 @@ namespace Gerente
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(Sqlite, connectDB.sq);
             _DataSet = new DataSet();
             adapter.Fill(_DataSet, "Contas");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ListViewItem list = new ListViewItem();
+            list = listView1.SelectedItems[0];
+            list.SubItems.RemoveAt(2);
+            list.SubItems.Add("Pago");
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(listView1.SelectedItems.Count>0)
+            {
+                ListViewItem list = new ListViewItem();
+                list = listView1.SelectedItems[0];
+                if (list.SubItems[3].Text == "Pendente")
+                {
+                    textBox4.Text = list.Text;
+                }
+            }
         }
     }
 }
