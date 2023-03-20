@@ -204,7 +204,7 @@ namespace Gerente
 
             if (dia == 2)
             {
-                segunda.Add(Tuple.Create(Matérias.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(),materias5.SelectedItem.ToString(),materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                segunda.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(),materias5.SelectedItem.ToString(),materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 3)

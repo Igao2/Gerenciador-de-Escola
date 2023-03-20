@@ -31,3 +31,5 @@ C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableM
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\EPPlus.xml
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.Login.resources
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\bin\Debug\MessagingToolkit.QRCode.dll
+C:\Users\Igor\Desktop\Gerente Escolar\Gerente\obj\Debug\Gerente.QRcode.resources

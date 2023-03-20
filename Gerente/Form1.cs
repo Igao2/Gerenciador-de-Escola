@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace Gerente
 {
@@ -140,39 +141,56 @@ namespace Gerente
                 }
                 if(z==1)
                 {
-                    Random rand = new Random();
-                    string s = rand.Next(100, 1000).ToString();
-                    MailMessage mail = new MailMessage("projetohelpy1@outlook.com", b);
-                    mail.Subject = "Recuperar senha";
-                    SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
-                    smtp.UseDefaultCredentials = false;
-                    mail.Body = "Digite esse código para recuperar sua senha " + s;
-                    smtp.Credentials = new NetworkCredential("projetohelpy1@outlook.com", "1234@.com");
-                    smtp.EnableSsl = true;
-                    smtp.Send(mail);
-                    string ez = Interaction.InputBox("Digite o código que foi enviado por notificação", "Mensagem do sistema");
-                    if(ez==s)
+                    Network net = new Network();
+                    if (net.IsAvailable==true)
                     {
-                        string a = Interaction.InputBox("Digite sua nova senha");
-                        try
+                        Random rand = new Random();
+                        string s = rand.Next(100, 1000).ToString();
+                        MailMessage mail = new MailMessage("projetohelpy1@outlook.com", b);
+                        mail.Subject = "Recuperar senha";
+                        SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
+                        smtp.UseDefaultCredentials = false;
+                        mail.Body = "Digite esse código para recuperar sua senha " + s;
+                        smtp.Credentials = new NetworkCredential("projetohelpy1@outlook.com", "1234@.com");
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                        string ez = Interaction.InputBox("Digite o código que foi enviado por notificação", "Mensagem do sistema");
+                        if (ez == s)
                         {
-                            string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
-                            SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
-                            com.ExecuteNonQuery();
+                            string a = Interaction.InputBox("Digite sua nova senha");
+                            try
+                            {
+                                string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
+                                SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
+                                com.ExecuteNonQuery();
+                            }
+                            catch (Exception E)
+                            {
+                                MessageBox.Show(E.Message);
+                            }
+
+                            MessageBox.Show("Senha Atualizada com sucesso, por favor faça o login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Visible = true;
                         }
-                        catch(Exception E)
+                        else
                         {
-                            MessageBox.Show(E.Message);
+                            MessageBox.Show("Código de verificação incorreto,por favor refaça o processo", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            this.Visible = true;
                         }
-                       
-                        MessageBox.Show("Senha Atualizada com sucesso, por favor faça o login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Visible = true;
                     }
                     else
                     {
-                        MessageBox.Show("Código de verificação incorreto,por favor refaça o processo", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        this.Visible = true;
+                       QRcode qr = new QRcode();
+                        qr.Show();
+                        string cod = Interaction.InputBox("Digite o código que você recebeu ao escanear:");
+                        if(cod==qr.s)
+                        {
+                            this.Hide();
+                            Home home = new Home();
+                            home.Show();
+                        }
                     }
+                   
                 }
                 if(z==0)
                 {
