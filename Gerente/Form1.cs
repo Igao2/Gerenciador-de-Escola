@@ -23,6 +23,7 @@ namespace Gerente
             InitializeComponent();
         }
 
+        public string b;
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
@@ -123,8 +124,8 @@ namespace Gerente
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            string b = Interaction.InputBox("Digite seu e-mail cadastrado");
+            //this.Visible = false;
+             b = Interaction.InputBox("Digite seu e-mail cadastrado");
             Connection con = new Connection();
             try
             {
@@ -161,6 +162,7 @@ namespace Gerente
                             try
                             {
                                 string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
+                                
                                 SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
                                 com.ExecuteNonQuery();
                             }
@@ -182,13 +184,7 @@ namespace Gerente
                     {
                        QRcode qr = new QRcode();
                         qr.Show();
-                        string cod = Interaction.InputBox("Digite o código que você recebeu ao escanear:");
-                        if(cod==qr.s)
-                        {
-                            this.Hide();
-                            Home home = new Home();
-                            home.Show();
-                        }
+                        
                     }
                    
                 }
