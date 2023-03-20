@@ -61,14 +61,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.Matérias = new System.Windows.Forms.DomainUpDown();
-            this.Matérias2 = new System.Windows.Forms.DomainUpDown();
-            this.Matérias3 = new System.Windows.Forms.DomainUpDown();
-            this.Matérias4 = new System.Windows.Forms.DomainUpDown();
-            this.Matérias5 = new System.Windows.Forms.DomainUpDown();
-            this.Matérias6 = new System.Windows.Forms.DomainUpDown();
-            this.Matérias7 = new System.Windows.Forms.DomainUpDown();
             this.label12 = new System.Windows.Forms.Label();
+            this.materias1 = new System.Windows.Forms.ComboBox();
+            this.materias2 = new System.Windows.Forms.ComboBox();
+            this.materias3 = new System.Windows.Forms.ComboBox();
+            this.materias6 = new System.Windows.Forms.ComboBox();
+            this.materias7 = new System.Windows.Forms.ComboBox();
+            this.materias4 = new System.Windows.Forms.ComboBox();
+            this.materias5 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,35 +198,35 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem2.Text = "Segunda";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem3.Text = "Terça";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem4.Text = "Quarta";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem5.Text = "Quinta";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(120, 22);
             this.toolStripMenuItem6.Text = "Sexta";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
@@ -362,63 +362,6 @@
             this.textBox10.Size = new System.Drawing.Size(100, 20);
             this.textBox10.TabIndex = 38;
             // 
-            // Matérias
-            // 
-            this.Matérias.Location = new System.Drawing.Point(159, 174);
-            this.Matérias.Name = "Matérias";
-            this.Matérias.Size = new System.Drawing.Size(120, 20);
-            this.Matérias.TabIndex = 40;
-            this.Matérias.Text = "Selecionar";
-            this.Matérias.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
-            // 
-            // Matérias2
-            // 
-            this.Matérias2.Location = new System.Drawing.Point(159, 199);
-            this.Matérias2.Name = "Matérias2";
-            this.Matérias2.Size = new System.Drawing.Size(120, 20);
-            this.Matérias2.TabIndex = 41;
-            this.Matérias2.Text = "Selecionar";
-            // 
-            // Matérias3
-            // 
-            this.Matérias3.Location = new System.Drawing.Point(159, 225);
-            this.Matérias3.Name = "Matérias3";
-            this.Matérias3.Size = new System.Drawing.Size(120, 20);
-            this.Matérias3.TabIndex = 42;
-            this.Matérias3.Text = "Selecionar";
-            // 
-            // Matérias4
-            // 
-            this.Matérias4.Location = new System.Drawing.Point(159, 251);
-            this.Matérias4.Name = "Matérias4";
-            this.Matérias4.Size = new System.Drawing.Size(120, 20);
-            this.Matérias4.TabIndex = 43;
-            this.Matérias4.Text = "Selecionar";
-            // 
-            // Matérias5
-            // 
-            this.Matérias5.Location = new System.Drawing.Point(159, 277);
-            this.Matérias5.Name = "Matérias5";
-            this.Matérias5.Size = new System.Drawing.Size(120, 20);
-            this.Matérias5.TabIndex = 45;
-            this.Matérias5.Text = "Selecionar";
-            // 
-            // Matérias6
-            // 
-            this.Matérias6.Location = new System.Drawing.Point(159, 304);
-            this.Matérias6.Name = "Matérias6";
-            this.Matérias6.Size = new System.Drawing.Size(120, 20);
-            this.Matérias6.TabIndex = 46;
-            this.Matérias6.Text = "Selecionar";
-            // 
-            // Matérias7
-            // 
-            this.Matérias7.Location = new System.Drawing.Point(159, 329);
-            this.Matérias7.Name = "Matérias7";
-            this.Matérias7.Size = new System.Drawing.Size(120, 20);
-            this.Matérias7.TabIndex = 47;
-            this.Matérias7.Text = "Selecionar";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -428,19 +371,77 @@
             this.label12.TabIndex = 48;
             this.label12.Text = "Matéria";
             // 
+            // materias1
+            // 
+            this.materias1.FormattingEnabled = true;
+            this.materias1.Location = new System.Drawing.Point(150, 173);
+            this.materias1.Name = "materias1";
+            this.materias1.Size = new System.Drawing.Size(121, 21);
+            this.materias1.TabIndex = 49;
+            this.materias1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // materias2
+            // 
+            this.materias2.FormattingEnabled = true;
+            this.materias2.Location = new System.Drawing.Point(150, 198);
+            this.materias2.Name = "materias2";
+            this.materias2.Size = new System.Drawing.Size(121, 21);
+            this.materias2.TabIndex = 50;
+            // 
+            // materias3
+            // 
+            this.materias3.FormattingEnabled = true;
+            this.materias3.Location = new System.Drawing.Point(150, 224);
+            this.materias3.Name = "materias3";
+            this.materias3.Size = new System.Drawing.Size(121, 21);
+            this.materias3.TabIndex = 51;
+            // 
+            // materias6
+            // 
+            this.materias6.FormattingEnabled = true;
+            this.materias6.Location = new System.Drawing.Point(150, 302);
+            this.materias6.Name = "materias6";
+            this.materias6.Size = new System.Drawing.Size(121, 21);
+            this.materias6.TabIndex = 52;
+            this.materias6.SelectedIndexChanged += new System.EventHandler(this.materias6_SelectedIndexChanged);
+            // 
+            // materias7
+            // 
+            this.materias7.FormattingEnabled = true;
+            this.materias7.Location = new System.Drawing.Point(150, 328);
+            this.materias7.Name = "materias7";
+            this.materias7.Size = new System.Drawing.Size(121, 21);
+            this.materias7.TabIndex = 53;
+            // 
+            // materias4
+            // 
+            this.materias4.FormattingEnabled = true;
+            this.materias4.Location = new System.Drawing.Point(150, 251);
+            this.materias4.Name = "materias4";
+            this.materias4.Size = new System.Drawing.Size(121, 21);
+            this.materias4.TabIndex = 54;
+            // 
+            // materias5
+            // 
+            this.materias5.FormattingEnabled = true;
+            this.materias5.Location = new System.Drawing.Point(150, 277);
+            this.materias5.Name = "materias5";
+            this.materias5.Size = new System.Drawing.Size(121, 21);
+            this.materias5.TabIndex = 55;
+            // 
             // Horario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 545);
+            this.Controls.Add(this.materias5);
+            this.Controls.Add(this.materias4);
+            this.Controls.Add(this.materias7);
+            this.Controls.Add(this.materias6);
+            this.Controls.Add(this.materias3);
+            this.Controls.Add(this.materias2);
+            this.Controls.Add(this.materias1);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.Matérias7);
-            this.Controls.Add(this.Matérias6);
-            this.Controls.Add(this.Matérias5);
-            this.Controls.Add(this.Matérias4);
-            this.Controls.Add(this.Matérias3);
-            this.Controls.Add(this.Matérias2);
-            this.Controls.Add(this.Matérias);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label11);
@@ -514,13 +515,13 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.DomainUpDown Matérias;
-        private System.Windows.Forms.DomainUpDown Matérias2;
-        private System.Windows.Forms.DomainUpDown Matérias3;
-        private System.Windows.Forms.DomainUpDown Matérias4;
-        private System.Windows.Forms.DomainUpDown Matérias5;
-        private System.Windows.Forms.DomainUpDown Matérias6;
-        private System.Windows.Forms.DomainUpDown Matérias7;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox materias1;
+        private System.Windows.Forms.ComboBox materias2;
+        private System.Windows.Forms.ComboBox materias3;
+        private System.Windows.Forms.ComboBox materias6;
+        private System.Windows.Forms.ComboBox materias7;
+        private System.Windows.Forms.ComboBox materias4;
+        private System.Windows.Forms.ComboBox materias5;
     }
 }

@@ -41,13 +41,13 @@ namespace Gerente
             string[] b = a.Split(',');
             for (int i = 0; i < b.Length; i++)
             {
-                Matérias.Items.Add(b[i]);
-                Matérias2.Items.Add(b[i]);
-                Matérias3.Items.Add(b[i]);
-                Matérias4.Items.Add(b[i]);
-                Matérias5.Items.Add(b[i]);
-                Matérias6.Items.Add(b[i]);
-                Matérias7.Items.Add(b[i]);
+                materias1.Items.Add(b[i]);
+                materias2.Items.Add(b[i]);
+                materias3.Items.Add(b[i]);
+                materias4.Items.Add(b[i]);
+                materias5.Items.Add(b[i]);
+                materias6.Items.Add(b[i]);
+                materias7.Items.Add(b[i]);
             }
         }
 
@@ -204,27 +204,27 @@ namespace Gerente
 
             if (dia == 2)
             {
-                segunda.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(),Matérias5.SelectedItem.ToString(),Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                segunda.Add(Tuple.Create(Matérias.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(),materias5.SelectedItem.ToString(),materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 3)
             {
-                terca.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                terca.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 4)
             {
-                quarta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                quarta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 5)
             {
-                quinta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                quinta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
             if (dia == 6)
             {
-                sexta.Add(Tuple.Create(Matérias.SelectedItem.ToString(), Matérias2.SelectedItem.ToString(), Matérias3.SelectedItem.ToString(), Matérias4.SelectedItem.ToString(), Matérias5.SelectedItem.ToString(), Matérias6.SelectedItem.ToString(), Matérias7.SelectedItem.ToString()));
+                sexta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
                 horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
             }
 
@@ -390,13 +390,14 @@ namespace Gerente
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Matérias.Items.Add(textBox10.Text);
-            Matérias2.Items.Add(textBox10.Text);
-            Matérias3.Items.Add(textBox10.Text);
-            Matérias4.Items.Add(textBox10.Text);
-            Matérias5.Items.Add(textBox10.Text);
-            Matérias6.Items.Add(textBox10.Text);
-            Matérias7.Items.Add(textBox10.Text);
+            materias1.Items.Add(textBox10.Text);
+            materias2.Items.Add(textBox10.Text);
+            materias3.Items.Add(textBox10.Text);
+            materias4.Items.Add(textBox10.Text);
+            materias5.Items.Add(textBox10.Text);
+            materias6.Items.Add(textBox10.Text);
+            materias7.Items.Add(textBox10.Text);
+           
             if (Properties.Settings.Default.Matérias == "")
             {
                 Properties.Settings.Default.Matérias = textBox10.Text;
@@ -413,6 +414,16 @@ namespace Gerente
         }
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materias6_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
