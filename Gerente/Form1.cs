@@ -31,7 +31,7 @@ namespace Gerente
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Properties.Settings.Default.Reset();
         }
 
         private void label1_Click(object sender, EventArgs e)

@@ -69,6 +69,14 @@
             this.materias7 = new System.Windows.Forms.ComboBox();
             this.materias4 = new System.Windows.Forms.ComboBox();
             this.materias5 = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -429,11 +437,64 @@
             this.materias5.Size = new System.Drawing.Size(121, 21);
             this.materias5.TabIndex = 55;
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(411, 158);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(353, 201);
+            this.listView1.TabIndex = 56;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Horário";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Segunda";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Terça";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Quarta";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Quinta";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Sexta";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(411, 383);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 57;
+            this.button5.Text = "Limpar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Horario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 545);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.materias5);
             this.Controls.Add(this.materias4);
             this.Controls.Add(this.materias7);
@@ -523,5 +584,13 @@
         private System.Windows.Forms.ComboBox materias7;
         private System.Windows.Forms.ComboBox materias4;
         private System.Windows.Forms.ComboBox materias5;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button button5;
     }
 }

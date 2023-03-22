@@ -143,23 +143,7 @@ namespace Gerente
                 var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
                 doc.InsertParagraph(texto);
                 doc.Save();
-                maskedTextBox1.Clear();
-                maskedTextBox2.Clear();
-                maskedTextBox3.Clear();
-                maskedTextBox4.Clear();
-                maskedTextBox5.Clear();
-                textBox1.Clear();
-                textBox2.Clear();
-               
-                segunda.RemoveAt(0);
-                terca.RemoveAt(0);
-                quarta.RemoveAt(0);
-                quinta.RemoveAt(0);
-                sexta.RemoveAt(0);
-                for (int i = 0; i < horario.Count; i++)
-                {
-                    horario.RemoveAt(i);
-                }
+                
             }
         }
 
@@ -200,33 +184,100 @@ namespace Gerente
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if(toolStripMenuItem1.Text == "Dia")
+            {
+                MessageBox.Show("Escolha o dia!!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            else
+            {
+                if (dia == 2)
+                {
+                    segunda.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                    horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+
+                }
+                if (dia == 3)
+                {
+                    terca.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                    horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+
+                }
+                if (dia == 4)
+                {
+                    quarta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                    horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+
+                }
+                if (dia == 5)
+                {
+                    quinta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                    horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+
+                }
+                if (dia == 6)
+                {
+                    sexta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
+                    horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+
+                }
+                if (segunda.Count != 0 && terca.Count != 0 && quarta.Count != 0 && quinta.Count != 0 && sexta.Count != 0)
+                {
+                    ListViewItem item = new ListViewItem(horario[0].Item1);
+                    ListViewItem item2 = new ListViewItem(horario[0].Item2);
+                    ListViewItem item3 = new ListViewItem(horario[0].Item3);
+                    ListViewItem item4 = new ListViewItem(horario[0].Item4);
+                    ListViewItem item5 = new ListViewItem(horario[0].Item5);
+                    ListViewItem item6 = new ListViewItem(horario[0].Item6);
+                    ListViewItem item7 = new ListViewItem(horario[0].Item7);
+
+                    item.SubItems.Add(segunda[0].Item1);
+                    item2.SubItems.Add(segunda[0].Item2);
+                    item3.SubItems.Add(segunda[0].Item3);
+                    item4.SubItems.Add(segunda[0].Item4);
+                    item5.SubItems.Add(segunda[0].Item5);
+                    item6.SubItems.Add(segunda[0].Item6);
+                    item7.SubItems.Add(segunda[0].Item7);
+
+                    item.SubItems.Add(terca[0].Item1);
+                    item2.SubItems.Add(terca[0].Item2);
+                    item3.SubItems.Add(terca[0].Item3);
+                    item4.SubItems.Add(terca[0].Item4);
+                    item5.SubItems.Add(terca[0].Item5);
+                    item6.SubItems.Add(terca[0].Item6);
+                    item7.SubItems.Add(terca[0].Item7);
+
+                    item.SubItems.Add(quarta[0].Item1);
+                    item2.SubItems.Add(quarta[0].Item2);
+                    item3.SubItems.Add(quarta[0].Item3);
+                    item4.SubItems.Add(quarta[0].Item4);
+                    item5.SubItems.Add(quarta[0].Item5);
+                    item6.SubItems.Add(quarta[0].Item6);
+                    item7.SubItems.Add(quarta[0].Item7);
+
+                    item.SubItems.Add(quinta[0].Item1);
+                    item2.SubItems.Add(quinta[0].Item2);
+                    item3.SubItems.Add(quinta[0].Item3);
+                    item4.SubItems.Add(quinta[0].Item4);
+                    item5.SubItems.Add(quinta[0].Item5);
+                    item6.SubItems.Add(quinta[0].Item6);
+                    item7.SubItems.Add(quinta[0].Item7);
+
+                    item.SubItems.Add(sexta[0].Item1);
+                    item2.SubItems.Add(sexta[0].Item2);
+                    item3.SubItems.Add(sexta[0].Item3);
+                    item4.SubItems.Add(sexta[0].Item4);
+                    item5.SubItems.Add(sexta[0].Item5);
+                    item6.SubItems.Add(sexta[0].Item6);
+                    item7.SubItems.Add(sexta[0].Item7);
 
 
-            if (dia == 2)
-            {
-                segunda.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(),materias5.SelectedItem.ToString(),materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
+                    listView1.Items.AddRange(new ListViewItem[] { item, item2, item3, item4, item5, item6, item7 });
+                }
+
             }
-            if (dia == 3)
-            {
-                terca.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
-            }
-            if (dia == 4)
-            {
-                quarta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
-            }
-            if (dia == 5)
-            {
-                quinta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
-            }
-            if (dia == 6)
-            {
-                sexta.Add(Tuple.Create(materias1.SelectedItem.ToString(), materias2.SelectedItem.ToString(), materias3.SelectedItem.ToString(), materias4.SelectedItem.ToString(), materias5.SelectedItem.ToString(), materias6.SelectedItem.ToString(), materias7.SelectedItem.ToString()));
-                horario.Add(Tuple.Create(maskedTextBox1.Text, maskedTextBox2.Text, maskedTextBox3.Text, maskedTextBox4.Text, maskedTextBox5.Text, maskedTextBox6.Text, maskedTextBox7.Text));
-            }
+            
+            
 
 
         }
@@ -346,23 +397,7 @@ namespace Gerente
                     }
                     package.SaveAs(a);
 
-                    maskedTextBox1.Clear();
-                    maskedTextBox2.Clear();
-                    maskedTextBox3.Clear();
-                    maskedTextBox4.Clear();
-                    maskedTextBox5.Clear();
-                    textBox1.Clear();
-                    textBox2.Clear();
                     
-                    segunda.RemoveAt(0);
-                    terca.RemoveAt(0);
-                    quarta.RemoveAt(0);
-                    quinta.RemoveAt(0);
-                    sexta.RemoveAt(0);
-                    for (int i = 0; i < horario.Count; i++)
-                    {
-                        horario.RemoveAt(i);
-                    }
 
                 }
 
@@ -426,6 +461,28 @@ namespace Gerente
         private void materias6_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            maskedTextBox1.Clear();
+            maskedTextBox2.Clear();
+            maskedTextBox3.Clear();
+            maskedTextBox4.Clear();
+            maskedTextBox5.Clear();
+            textBox1.Clear();
+            textBox2.Clear();
+
+            segunda.RemoveAt(0);
+            terca.RemoveAt(0);
+            quarta.RemoveAt(0);
+            quinta.RemoveAt(0);
+            sexta.RemoveAt(0);
+            for (int i = 0; i < horario.Count; i++)
+            {
+                horario.RemoveAt(i);
+            }
+            listView1.Items.Clear();
         }
     }
 }
