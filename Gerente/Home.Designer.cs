@@ -42,13 +42,13 @@
             // 
             this.panel1.Location = new System.Drawing.Point(135, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(856, 584);
+            this.panel1.Size = new System.Drawing.Size(914, 677);
             this.panel1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(12, 95);
+            this.button1.Location = new System.Drawing.Point(12, 60);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 68);
             this.button1.TabIndex = 1;
@@ -59,7 +59,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(12, 399);
+            this.button2.Location = new System.Drawing.Point(12, 364);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(103, 68);
             this.button2.TabIndex = 2;
@@ -70,7 +70,7 @@
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(12, 296);
+            this.button3.Location = new System.Drawing.Point(12, 261);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 68);
             this.button3.TabIndex = 3;
@@ -81,7 +81,7 @@
             // button4
             // 
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(12, 198);
+            this.button4.Location = new System.Drawing.Point(12, 163);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(103, 68);
             this.button4.TabIndex = 4;
@@ -108,7 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 656);
+            this.ClientSize = new System.Drawing.Size(1061, 749);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

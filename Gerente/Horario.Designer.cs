@@ -492,7 +492,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 545);
+            this.ClientSize = new System.Drawing.Size(914, 677);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.materias5);

@@ -17,7 +17,8 @@ namespace Gerente
     public partial class QRcode : Form
     {
         public static Random rand = new Random();
-        public string s = rand.Next(100, 1000).ToString();
+        public static string s = rand.Next(100, 1000).ToString();
+        public string texto = "Seu código: " + s;
         public QRcode()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace Gerente
             qrCodecEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.Q;
            
             Image qrcode;
-            qrcode = qrCodecEncoder.Encode(s);
+            qrcode = qrCodecEncoder.Encode(texto);
             pictureBox1.Image= qrcode;
 
         }
@@ -44,7 +45,7 @@ namespace Gerente
         {
            
             string cod = Interaction.InputBox("Digite o código que você recebeu ao escanear:");
-            if(s!="")
+            if(cod!="")
             {
                 if (cod == s)
                 {

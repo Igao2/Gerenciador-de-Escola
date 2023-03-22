@@ -49,14 +49,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -263,6 +263,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Finanças";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(181, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(106, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Registrar Pagamento";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.YellowGreen;
+            this.textBox4.Location = new System.Drawing.Point(184, 37);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 21;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(184, 75);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(88, 25);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "Registrar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(9, 206);
@@ -310,39 +338,11 @@
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(184, 75);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 25);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "Registrar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.Color.YellowGreen;
-            this.textBox4.Location = new System.Drawing.Point(184, 37);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 21;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(181, 16);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(106, 13);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "Registrar Pagamento";
-            // 
             // Contas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 584);
+            this.ClientSize = new System.Drawing.Size(914, 677);
             this.ControlBox = false;
             this.Controls.Add(this.label9);
             this.Controls.Add(this.richTextBox1);
