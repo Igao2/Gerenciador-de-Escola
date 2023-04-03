@@ -60,5 +60,13 @@ namespace Gerente
             dt = DateTime.Now;
             label1.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.panel1.Controls.Clear();
+            Aluno aluno = new Aluno() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true }; ;
+            this.panel1.Controls.Add(aluno);
+            aluno.Show();
+        }
     }
 }
