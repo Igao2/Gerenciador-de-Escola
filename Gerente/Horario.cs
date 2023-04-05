@@ -12,6 +12,8 @@ using Xceed.Words.NET;
 using static System.Net.Mime.MediaTypeNames;
 using OfficeOpenXml;
 using System.IO;
+using System.Data.SQLite;
+using System.Data.Entity.Migrations.Model;
 
 namespace Gerente
 {
@@ -29,25 +31,29 @@ namespace Gerente
         List<Tuple<string, string, string, string, string, string, string>> quinta = new List<Tuple<string, string, string, string, string, string, string>>();
         List<Tuple<string, string, string, string, string, string, string>> sexta = new List<Tuple<string, string, string, string, string, string, string>>();
         List<Tuple<string, string, string, string, string, string, string>> horario = new List<Tuple<string, string, string, string, string, string, string>>();
-
+        private DataSet dataSet = new DataSet();
         private void Horario_Load(object sender, EventArgs e)
         {
-            string a = "";
-             if(Properties.Settings.Default.Matérias != "")
+            try
             {
-                a = Properties.Settings.Default.Matérias;
-            }
+                Connection connection = new Connection();
+                connection.conectar();
+                string sql = "SELECT CodGrade, Disciplinas.NomeDisciplina FROM GradeCurricular" +
+                    " INNER JOIN Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina GROUP BY CodGrade";
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(sql, connection.sq);
+
+                dataAdapter.Fill(dataSet, "Grade");
+                DataTable table = dataSet.Tables["Grade"];
+                for(int i = 0;i<table.Rows.Count;i++)
+                {
+                    DataRow linhaGrade = table.Rows[i];
+                    comboBox1.Items.Add(linhaGrade.ItemArray[0].ToString());
+                }
                 
-            string[] b = a.Split(',');
-            for (int i = 0; i < b.Length; i++)
+            }
+            catch(Exception E)
             {
-                materias1.Items.Add(b[i]);
-                materias2.Items.Add(b[i]);
-                materias3.Items.Add(b[i]);
-                materias4.Items.Add(b[i]);
-                materias5.Items.Add(b[i]);
-                materias6.Items.Add(b[i]);
-                materias7.Items.Add(b[i]);
+                MessageBox.Show(E.Message,"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -407,7 +413,16 @@ namespace Gerente
 
             }
         }
-
+        public void limpar()
+        {
+            materias1.Items.Clear();
+            materias2.Items.Clear();
+            materias3.Items.Clear();
+            materias4.Items.Clear();
+            materias5.Items.Clear();
+            materias6.Items.Clear();
+            materias7.Items.Clear();
+        }
         private void maskedTextBox6_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
@@ -425,26 +440,18 @@ namespace Gerente
 
         private void button4_Click(object sender, EventArgs e)
         {
-            materias1.Items.Add(textBox10.Text);
-            materias2.Items.Add(textBox10.Text);
-            materias3.Items.Add(textBox10.Text);
-            materias4.Items.Add(textBox10.Text);
-            materias5.Items.Add(textBox10.Text);
-            materias6.Items.Add(textBox10.Text);
-            materias7.Items.Add(textBox10.Text);
-           
-            if (Properties.Settings.Default.Matérias == "")
+            try
             {
-                Properties.Settings.Default.Matérias = textBox10.Text;
-                Properties.Settings.Default.Save();
-                textBox10.Clear();
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "INSERT INTO Disciplinas VALUES('"+textBox10.Text+"','"+textBox3.Text+"','" + textBox4.Text + "')";
+                SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                command.ExecuteNonQuery();
+                con.desconectar();
             }
-            
-            else
+            catch(Exception E)
             {
-                Properties.Settings.Default.Matérias = Properties.Settings.Default.Matérias + "," + textBox10.Text;
-                Properties.Settings.Default.Save();
-                textBox10.Clear();
+                MessageBox.Show(E.Message);
             }
         }
 
@@ -483,6 +490,68 @@ namespace Gerente
                 horario.RemoveAt(i);
             }
             listView1.Items.Clear();
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                limpar();
+
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "SELECT CodGrade,Disciplinas.NomeDisciplina FROM GradeCurricular " +
+                    "Inner join Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina WHERE GradeCurricular.CodGrade = '" + int.Parse(comboBox1.Text) + "'";
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
+                adapter.Fill(dataSet, "Disciplinas");
+                DataTable dis = dataSet.Tables["Disciplinas"];
+                for(int i = 0; i<dis.Rows.Count;i++)
+                {
+                    DataRow disciplina = dis.Rows[i];
+                    
+                    materias1.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias2.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias3.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias4.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias5.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias6.Items.Add(disciplina.ItemArray[1].ToString());
+                    materias7.Items.Add(disciplina.ItemArray[1].ToString());
+                }
+                dataSet.Tables["Disciplinas"].Reset();
+
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.Message);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "INSERT INTO GradeCurricular VALUES('"+textBox5.Text+"','"+maskedTextBox8.Text+"','"+textBox6.Text+"')";
+                SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                command.ExecuteNonQuery();
+                con.desconectar();
+            }
+            catch(Exception E)
+            {
+                MessageBox.Show(E.Message);
+            }
+        }
+
+        private void maskedTextBox8_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
