@@ -25,6 +25,7 @@ namespace Gerente
         }
 
         public string b;
+        private DataSet dtSet = new DataSet();
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
@@ -39,71 +40,10 @@ namespace Gerente
         {
 
         }
-       private  string[] Criptografar(string login,string senha)
-        {
-            string[] acesso = new string[2];
-            char[] alfabeto =
-            {
-                'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
-                'q','r','s','t','u','v','w','x','y','z'
-            };
-            char[] numeros =
-            {
-                '1','2','3','4','5','6','7','8','9','0'
-            };
-            char[] numeros2 = new char[10];
-            char[] alfabeto2 = new char[26]; 
-            for(int x = 0; x<numeros.Length;x++)
-            {
-                int b = (x + 7) % 10;
-                numeros2[x] = numeros[b];
-            }
-            for(int i = 0;i<alfabeto.Length;i++)
-            {
-                int b = (i + 7) % 26;
-                alfabeto2[i] = alfabeto[b];
-
-            }
-            StringBuilder str = new StringBuilder(login);
-            
-            for(int j = 0; j<login.Length;j++)
-            {
-                for (int i = 0; i < alfabeto.Length; i++)
-                {
-                    if (login[j].ToString().Contains(alfabeto[i]))
-                    {
-                        str[j] = alfabeto2[i];
-                    }
-                    
-                }
-            }
-            acesso[0] = str.ToString();
-            StringBuilder std = new StringBuilder(senha);
-
-            for (int j = 0; j < senha.Length; j++)
-            {
-                for (int i = 0; i < alfabeto.Length; i++)
-                {
-                    if (senha[j].ToString().Contains(alfabeto[i]))
-                    {
-                        std[j] = alfabeto2[i];
-                    }
-                    
-                }
-                for(int x = 0;x<numeros.Length;x++)
-                {
-                    if (senha[j].ToString().Contains(numeros[x]))
-                    {
-                        std[j] = numeros2[x];
-                    }
-                }
-            }
-            acesso[1] = std.ToString();
-            return acesso;
-        }
+      
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] acesso = Criptografar(email.Text, senha.Text);
+            
            string arroba = "@";
             string com = ".com";
            
@@ -111,7 +51,7 @@ namespace Gerente
                 con.conectar();
                 string a = email.Text;
                 string b = senha.Text;
-            bool certo = false;
+        
 
             if (email.Text.Contains(arroba) && email.Text.Contains(com))
             {
@@ -119,7 +59,7 @@ namespace Gerente
                 {
                     int z = 0;
 
-                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + acesso[0] + "' AND Senha = '" + acesso[1] + "' ";
+                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + a + "' AND Senha = '" + b + "' ";
                     SQLiteDataReader dr;
                     SQLiteCommand bou = new SQLiteCommand(sql,con.sq);
                     dr = bou.ExecuteReader();
@@ -143,7 +83,7 @@ namespace Gerente
                 catch (Exception E)
                 {
                     MessageBox.Show(E.Message.ToString());
-                    certo = false;
+                    
                 }
                 
             }
@@ -156,40 +96,17 @@ namespace Gerente
 
         private void button2_Click(object sender, EventArgs e)
         {
-                
-                Connection con = new Connection();
-                con.conectar();
-            string arroba = "@";
-            string com = ".com";
-            if (email.Text.Contains(arroba) && email.Text.Contains(com))
-            {
 
-                try
-                {
-                    
-                    string[] login = Criptografar(email.Text, senha.Text);
-                    string sqlinsert = "INSERT INTO Login(Email,Senha) VALUES('"+login[0]+"','" + login[1] +"')";
-                    SQLiteCommand command = new SQLiteCommand(sqlinsert, con.sq);
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Cadastro realizado, por favor faça o Login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch(Exception E)
-                {
-                    MessageBox.Show(E.Message.ToString());
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Digite um email válido!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            Cadastro cad = new Cadastro();
+            cad.Show();
           
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //this.Visible = false;
-             b = Interaction.InputBox("Digite seu e-mail cadastrado");
+            string b = Interaction.InputBox("Digite seu e-mail cadastrado");
+           
             Connection con = new Connection();
             try
             {
@@ -209,6 +126,7 @@ namespace Gerente
                     Network net = new Network();
                     if (net.IsAvailable==true)
                     {
+                       
                         Random rand = new Random();
                         string s = rand.Next(100, 1000).ToString();
                         MailMessage mail = new MailMessage("projetohelpy1@outlook.com", b);
@@ -219,24 +137,56 @@ namespace Gerente
                         smtp.Credentials = new NetworkCredential("projetohelpy1@outlook.com", "1234@.com");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
-                        string ez = Interaction.InputBox("Digite o código que foi enviado por notificação", "Mensagem do sistema");
+                        string ez = Interaction.InputBox("Digite o código que foi enviado por notificação" , "Mensagem do sistema");
                         if (ez == s)
                         {
-                            string a = Interaction.InputBox("Digite sua nova senha");
                             try
                             {
-                                string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
-                                
-                                SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
-                                com.ExecuteNonQuery();
-                            }
-                            catch (Exception E)
-                            {
-                                MessageBox.Show(E.Message);
-                            }
+                                string pergunta = "";
+                                string resposta = "";
+                                string sqlAd = "Select emailUsuario,Pergunta_Seguranca.pergunta,resposta from pergunta_usuario inner join Pergunta_Seguranca on Pergunta_Seguranca.CodPergunta = pergunta_usuario.CodPergunta where emailUsuario = '" + b + "'";
+                                SQLiteDataAdapter liteDataAdapter = new SQLiteDataAdapter(sqlAd, con.sq);
+                                liteDataAdapter.Fill(dtSet, "segurança");
+                                DataTable segura = dtSet.Tables["segurança"];
+                                for(int i = 0; i < segura.Rows.Count; i++)
+                                {
+                                    DataRow linhaseg = segura.Rows[i];
+                                    if (linhaseg.ItemArray[0].ToString()==b)
+                                    {
+                                        pergunta = linhaseg.ItemArray[1].ToString();
+                                        resposta = linhaseg.ItemArray[2].ToString();
+                                    }
+                                }
+                                string teste = Interaction.InputBox(pergunta, "Mensagem do Sistema");
+                                if(teste == resposta)
+                                {
+                                    string a = Interaction.InputBox("Digite sua nova senha");
 
-                            MessageBox.Show("Senha Atualizada com sucesso, por favor faça o login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Visible = true;
+                                    try
+                                    {
+                                        string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
+
+                                        SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
+                                        com.ExecuteNonQuery();
+                                    }
+                                    catch (Exception E)
+                                    {
+                                        MessageBox.Show(E.Message);
+                                    }
+
+                                    MessageBox.Show("Senha Atualizada com sucesso, por favor faça o login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    this.Visible = true;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Resposta incorreta!", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                             catch(Exception E)
+                            {
+                                MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            
                         }
                         else
                         {
