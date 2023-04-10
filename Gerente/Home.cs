@@ -68,5 +68,10 @@ namespace Gerente
             this.panel1.Controls.Add(aluno);
             aluno.Show();
         }
+
+        private void Home_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -151,5 +151,67 @@ namespace Gerente
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(listView2.SelectedItems.Count>0)
+            {
+                textBox5.Text = listView2.SelectedItems[0].Text;
+                textBox7.Text = listView2.SelectedItems[0].Text;
+
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "DELETE From Professor Where Nome = '" + textBox5.Text + "'";
+                SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                command.ExecuteNonQuery();
+                con.desconectar();
+                ListViewItem item = listView2.SelectedItems[0];
+                listView2.Items.Remove(item);
+            }
+            catch(Exception E)
+            {
+                MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if(textBox6.Text != "")
+            {
+                try
+                {
+                    Connection con = new Connection();
+                    con.conectar();
+                    string sql = "UPDATE Professor SET Salario = '" + textBox6.Text + "'Where Nome = '" + textBox7.Text + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                    command.ExecuteNonQuery();
+                    con.desconectar();
+                    listView2.SelectedItems[0].SubItems[2].Text = textBox6.Text;
+                    textBox6.Clear();
+
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Preencha o campo de reatribuição de salário!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+           
+        }
     }
 }

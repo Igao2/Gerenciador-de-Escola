@@ -90,6 +90,11 @@
             this.label18 = new System.Windows.Forms.Label();
             this.maskedTextBox8 = new System.Windows.Forms.MaskedTextBox();
             this.button6 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -524,9 +529,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(61, 145);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(83, 13);
+            this.label13.Size = new System.Drawing.Size(82, 13);
             this.label13.TabIndex = 59;
-            this.label13.Text = "Grade Curricular";
+            this.label13.Text = "Matriz Curricular";
             // 
             // textBox3
             // 
@@ -579,18 +584,18 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(744, 55);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(87, 13);
+            this.label16.Size = new System.Drawing.Size(86, 13);
             this.label16.TabIndex = 67;
-            this.label16.Text = "Código da Grade";
+            this.label16.Text = "Código da Matriz";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(744, 145);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(103, 13);
+            this.label17.Size = new System.Drawing.Size(43, 13);
             this.label17.TabIndex = 68;
-            this.label17.Text = "Código da Disciplina";
+            this.label17.Text = "Portaria";
             // 
             // label18
             // 
@@ -617,15 +622,67 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(79, 49);
             this.button6.TabIndex = 71;
-            this.button6.Text = "Inserir na Grade";
+            this.button6.Text = "Criar Matriz";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(563, 285);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(65, 21);
+            this.comboBox2.TabIndex = 72;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(563, 324);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(65, 21);
+            this.comboBox3.TabIndex = 73;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(560, 267);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(70, 13);
+            this.label19.TabIndex = 74;
+            this.label19.Text = "Código matriz";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(563, 308);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(52, 13);
+            this.label20.TabIndex = 75;
+            this.label20.Text = "Disciplina";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(295, 93);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 76;
+            this.button7.Text = "Atualizar";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Horario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 677);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.maskedTextBox8);
             this.Controls.Add(this.label18);
@@ -751,5 +808,10 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.MaskedTextBox maskedTextBox8;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button button7;
     }
 }

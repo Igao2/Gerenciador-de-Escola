@@ -14,6 +14,7 @@ using OfficeOpenXml;
 using System.IO;
 using System.Data.SQLite;
 using System.Data.Entity.Migrations.Model;
+using Application = System.Windows.Forms.Application;
 
 namespace Gerente
 {
@@ -34,27 +35,7 @@ namespace Gerente
         private DataSet dataSet = new DataSet();
         private void Horario_Load(object sender, EventArgs e)
         {
-            try
-            {
-                Connection connection = new Connection();
-                connection.conectar();
-                string sql = "SELECT CodGrade, Disciplinas.NomeDisciplina FROM GradeCurricular" +
-                    " INNER JOIN Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina GROUP BY CodGrade";
-                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(sql, connection.sq);
-
-                dataAdapter.Fill(dataSet, "Grade");
-                DataTable table = dataSet.Tables["Grade"];
-                for(int i = 0;i<table.Rows.Count;i++)
-                {
-                    DataRow linhaGrade = table.Rows[i];
-                    comboBox1.Items.Add(linhaGrade.ItemArray[0].ToString());
-                }
-                
-            }
-            catch(Exception E)
-            {
-                MessageBox.Show(E.Message,"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
+            form_load();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -501,8 +482,8 @@ namespace Gerente
 
                 Connection con = new Connection();
                 con.conectar();
-                string sql = "SELECT CodGrade,Disciplinas.NomeDisciplina FROM GradeCurricular " +
-                    "Inner join Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina WHERE GradeCurricular.CodGrade = '" + int.Parse(comboBox1.Text) + "'";
+                string sql = "SELECT CodMatriz,Disciplinas.NomeDisciplina FROM GradeCurricular " +
+                    "Inner join Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina WHERE GradeCurricular.CodMatriz = '" + int.Parse(comboBox1.Text) + "'";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
                 adapter.Fill(dataSet, "Disciplinas");
                 DataTable dis = dataSet.Tables["Disciplinas"];
@@ -526,6 +507,53 @@ namespace Gerente
                 MessageBox.Show(E.Message);
             }
         }
+        private void form_load()
+        {
+            try
+            {
+                Connection connection = new Connection();
+                connection.conectar();
+                string sql = "SELECT CodMatriz, Disciplinas.NomeDisciplina FROM GradeCurricular" +
+                    " INNER JOIN Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina GROUP BY CodMatriz";
+                string SQL = "Select NomeDisciplina,CodDisciplina From Disciplinas";
+                string sQL = "Select CodMatriz from Matriz";
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(SQL, connection.sq);
+                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(sql, connection.sq);
+                SQLiteDataAdapter dt = new SQLiteDataAdapter(sQL,connection.sq);
+
+                dataAdapter.Fill(dataSet, "Grade");
+                adapter.Fill(dataSet, "Disciplinas");
+                dt.Fill(dataSet, "Matriz");
+                DataTable table = dataSet.Tables["Grade"];
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    DataRow linhaGrade = table.Rows[i];
+                    comboBox1.Items.Add(linhaGrade.ItemArray[0].ToString());
+                    
+
+                }
+                DataTable disc = dataSet.Tables["Disciplinas"];
+                for (int j = 0; j < disc.Rows.Count; j++)
+                {
+                    DataRow linhaDisc = disc.Rows[j];
+                    comboBox3.Items.Add(linhaDisc.ItemArray[0].ToString());
+                }
+                DataTable matriz = dataSet.Tables["Matriz"];
+                for (int x = 0; x < matriz.Rows.Count; x++)
+                {
+
+                    DataRow linhaMatriz = matriz.Rows[x];//lalalalalalalalalalal
+                    comboBox2.Items.Add(linhaMatriz.ItemArray[0].ToString());
+                }
+
+                dataSet.Reset();
+
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -533,7 +561,7 @@ namespace Gerente
             {
                 Connection con = new Connection();
                 con.conectar();
-                string sql = "INSERT INTO GradeCurricular VALUES('"+textBox5.Text+"','"+maskedTextBox8.Text+"','"+textBox6.Text+"')";
+                string sql = "INSERT INTO Matriz VALUES('"+textBox5.Text+"','"+maskedTextBox8.Text+"','"+textBox6.Text+"')";
                 SQLiteCommand command = new SQLiteCommand(sql, con.sq);
                 command.ExecuteNonQuery();
                 con.desconectar();
@@ -552,6 +580,18 @@ namespace Gerente
         private void comboBox1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            this.InitializeComponent();
+            form_load();
         }
     }
 }

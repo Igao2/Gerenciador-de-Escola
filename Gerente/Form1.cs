@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Gerente
 {
@@ -38,9 +39,71 @@ namespace Gerente
         {
 
         }
+       private  string[] Criptografar(string login,string senha)
+        {
+            string[] acesso = new string[2];
+            char[] alfabeto =
+            {
+                'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
+                'q','r','s','t','u','v','w','x','y','z'
+            };
+            char[] numeros =
+            {
+                '1','2','3','4','5','6','7','8','9','0'
+            };
+            char[] numeros2 = new char[10];
+            char[] alfabeto2 = new char[26]; 
+            for(int x = 0; x<numeros.Length;x++)
+            {
+                int b = (x + 7) % 10;
+                numeros2[x] = numeros[b];
+            }
+            for(int i = 0;i<alfabeto.Length;i++)
+            {
+                int b = (i + 7) % 26;
+                alfabeto2[i] = alfabeto[b];
 
+            }
+            StringBuilder str = new StringBuilder(login);
+            
+            for(int j = 0; j<login.Length;j++)
+            {
+                for (int i = 0; i < alfabeto.Length; i++)
+                {
+                    if (login[j].ToString().Contains(alfabeto[i]))
+                    {
+                        str[j] = alfabeto2[i];
+                    }
+                    
+                }
+            }
+            acesso[0] = str.ToString();
+            StringBuilder std = new StringBuilder(senha);
+
+            for (int j = 0; j < senha.Length; j++)
+            {
+                for (int i = 0; i < alfabeto.Length; i++)
+                {
+                    if (senha[j].ToString().Contains(alfabeto[i]))
+                    {
+                        std[j] = alfabeto2[i];
+                    }
+                    
+                }
+                for(int x = 0;x<numeros.Length;x++)
+                {
+                    if (senha[j].ToString().Contains(numeros[x]))
+                    {
+                        std[j] = numeros2[x];
+                    }
+                }
+            }
+            acesso[1] = std.ToString();
+            return acesso;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
+            string[] acesso = Criptografar(email.Text, senha.Text);
            string arroba = "@";
             string com = ".com";
            
@@ -56,7 +119,7 @@ namespace Gerente
                 {
                     int z = 0;
 
-                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + email.Text + "' AND Senha = '" + senha.Text + "' ";
+                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + acesso[0] + "' AND Senha = '" + acesso[1] + "' ";
                     SQLiteDataReader dr;
                     SQLiteCommand bou = new SQLiteCommand(sql,con.sq);
                     dr = bou.ExecuteReader();
@@ -104,7 +167,8 @@ namespace Gerente
                 try
                 {
                     
-                    string sqlinsert = "INSERT INTO Login(Email,Senha) VALUES('"+email.Text+"','" +senha.Text+"')";
+                    string[] login = Criptografar(email.Text, senha.Text);
+                    string sqlinsert = "INSERT INTO Login(Email,Senha) VALUES('"+login[0]+"','" + login[1] +"')";
                     SQLiteCommand command = new SQLiteCommand(sqlinsert, con.sq);
                     command.ExecuteNonQuery();
                     MessageBox.Show("Cadastro realizado, por favor faça o Login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
