@@ -49,22 +49,51 @@ namespace Gerente
             {
                 if (cod == s)
                 {
-                    string senha = Interaction.InputBox("Insira sua senha nova:");
+                    int y = 0;
+                    GetSet get = new GetSet();
+                    string b = get.geta();
+                    Criptografia criptografia = new Criptografia();
+                    string[] crip = criptografia.Criptografar(b, s.ToString());
                     try
                     {
-                        Login log = new Login();
+                        DataTable table = new DataTable();
                         Connection con = new Connection();
+                        string sql = "SELECT Pergunta_Seguranca.pergunta,emailUsuario From pergunta_usuario inner join Pergunta_Seguranca on Pergunta_Seguranca.CodPergunta = pergunta_usuario.CodPergunta WHERE emailUsuario ='" + crip[0] + "'";
                         con.conectar();
-                        string update = "UPDATE Login SET Senha = '" + senha + "' WHERE Email ='" + log.b + "'";
-                        SQLiteCommand command = new SQLiteCommand(update, con.sq);
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Por favor faça o login!");
-                        this.Close();
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
+                        adapter.Fill(table);
+                        string pergunta = "";
+                        for(int i = 0; i<table.Rows.Count;i++)
+                        {
+                            pergunta = table.Rows[i].ItemArray[0].ToString();
+                        };
+                        string reSposta = Interaction.InputBox(pergunta, "Pergunta de Segurança");
+                        string SQl = "Select resposta from pergunta_usuario Where emailUsuario='"+crip[0] + "'AND resposta = '"+reSposta+"'";
+                        SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                        SQLiteDataReader sQLiteDataReader;
+                        sQLiteDataReader = command.ExecuteReader();
+                        while(sQLiteDataReader.Read())
+                        {
+                            y++;
+                        }
+                        if(y==1)
+                        {
+                            NovaSenha n = new NovaSenha();
+                           
+                            n.Show();
+                            this.Close();
+
+                        }
+                        if(y==0)
+                        {
+                            MessageBox.Show("Resposta errada!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (Exception E)
+                    catch(Exception E)
                     {
-                        MessageBox.Show(E.Message);
+                        MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                   
                 }
                 else
                 {

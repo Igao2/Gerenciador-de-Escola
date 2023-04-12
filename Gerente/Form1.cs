@@ -24,7 +24,7 @@ namespace Gerente
             InitializeComponent();
         }
 
-        public string b;
+      
         private DataSet dtSet = new DataSet();
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
@@ -57,9 +57,12 @@ namespace Gerente
             {
                 try
                 {
+                    Criptografia criptografia = new Criptografia();
+                    string[] Login = criptografia.Criptografar(a,b);
+                    
                     int z = 0;
 
-                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + a + "' AND Senha = '" + b + "' ";
+                    string sql = "SELECT Email,Senha FROM Login WHERE Email = '" + Login[0] + "' AND Senha = '" + Login[1] + "' ";
                     SQLiteDataReader dr;
                     SQLiteCommand bou = new SQLiteCommand(sql,con.sq);
                     dr = bou.ExecuteReader();
@@ -105,14 +108,19 @@ namespace Gerente
         private void button3_Click(object sender, EventArgs e)
         {
             //this.Visible = false;
-            string b = Interaction.InputBox("Digite seu e-mail cadastrado");
-           
+            GetSet get = new GetSet();
+            
+string b = Interaction.InputBox("Digite seu e-mail cadastrado");
+            get.seta(b);
+            string q = "sdfkjsdfkl";
+            Criptografia criptografia = new Criptografia();
+            string[] login = criptografia.Criptografar(b, q);
             Connection con = new Connection();
             try
             {
                 int z = 0;
                 con.conectar();
-                string sql = "SELECT Email FROM Login WHERE Email = '" + b + "'";
+                string sql = "SELECT Email FROM Login WHERE Email = '" + login[0] + "'";
                 SQLiteCommand command = new SQLiteCommand(sql,con.sq);
                 SQLiteDataReader dataReader;
                 dataReader = command.ExecuteReader();
@@ -160,22 +168,10 @@ namespace Gerente
                                 string teste = Interaction.InputBox(pergunta, "Mensagem do Sistema");
                                 if(teste == resposta)
                                 {
-                                    string a = Interaction.InputBox("Digite sua nova senha");
 
-                                    try
-                                    {
-                                        string sqlupdate = "UPDATE Login SET Senha = '" + a + "'WHERE Email = '" + b + "'";
-
-                                        SQLiteCommand com = new SQLiteCommand(sqlupdate, con.sq);
-                                        com.ExecuteNonQuery();
-                                    }
-                                    catch (Exception E)
-                                    {
-                                        MessageBox.Show(E.Message);
-                                    }
-
-                                    MessageBox.Show("Senha Atualizada com sucesso, por favor faça o login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    this.Visible = true;
+                                    NovaSenha nova = new NovaSenha();
+                                    nova.Show();
+                                    
                                 }
                                 else
                                 {

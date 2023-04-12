@@ -49,6 +49,7 @@ namespace Gerente
            
             adapter1.Fill(_DataSet, "Professor");
             adapter2.Fill(_DataSet, "Disciplinas");
+            
         }
         private void carregaLista()
         {

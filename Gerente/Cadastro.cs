@@ -38,12 +38,13 @@ namespace Gerente
 
                 try
                 {
+                    Criptografia criptografia = new Criptografia();
+                   string [] asc =  criptografia.Criptografar(email.Text,senha.Text);
 
-
-                    string sqlinsert = "INSERT INTO Login(Email,Senha) VALUES('" + email.Text + "','" + senha.Text + "')";
+                    string sqlinsert = "INSERT INTO Login(Email,Senha) VALUES('" + asc[0] + "','" + asc[1] + "')";
                     SQLiteCommand command = new SQLiteCommand(sqlinsert, con.sq);
                     command.ExecuteNonQuery();
-                    string sqlInsert = "INSERT INTO pergunta_usuario(emailUsuario,CodPergunta,resposta) VALUES('"+ email.Text +"','"+x+"','"+textBox3.Text+"')";
+                    string sqlInsert = "INSERT INTO pergunta_usuario(emailUsuario,CodPergunta,resposta) VALUES('"+ asc[0] +"','"+x+"','"+textBox3.Text+"')";
                     SQLiteCommand comand = new SQLiteCommand(sqlInsert, con.sq);
                     comand.ExecuteNonQuery();
                     MessageBox.Show("Cadastro realizado, por favor faça o Login", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
