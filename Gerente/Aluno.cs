@@ -21,6 +21,7 @@ namespace Gerente
         private DataSet dataSet = new DataSet();
         private void Aluno_Load(object sender, EventArgs e)
         {
+           
             carregar();
             inicializar();
         }
@@ -69,6 +70,7 @@ namespace Gerente
             {
                 DataRow linhaTurmas = turmas.Rows[i];
                 comboBox1.Items.Add(linhaTurmas.ItemArray[2].ToString());
+                comboBox2.Items.Add(linhaTurmas.ItemArray[2].ToString());
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +101,22 @@ namespace Gerente
             {
                 MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Hide();
+            groupBox1.Show();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

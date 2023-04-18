@@ -72,3 +72,4 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.pdb
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\AsxCrypto.dll
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Cadastro.resources
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.NovaSenha.resources
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Form3.resources
