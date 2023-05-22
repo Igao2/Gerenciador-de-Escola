@@ -113,6 +113,7 @@ namespace Gerente
 string b = Interaction.InputBox("Digite seu e-mail cadastrado");
             get.seta(b);
             string q = "sdfkjsdfkl";
+            
             Criptografia criptografia = new Criptografia();
             string[] login = criptografia.Criptografar(b, q);
             Connection con = new Connection();
@@ -120,6 +121,7 @@ string b = Interaction.InputBox("Digite seu e-mail cadastrado");
             {
                 int z = 0;
                 con.conectar();
+            
                 string sql = "SELECT Email FROM Login WHERE Email = '" + login[0] + "'";
                 SQLiteCommand command = new SQLiteCommand(sql,con.sq);
                 SQLiteDataReader dataReader;
@@ -134,7 +136,7 @@ string b = Interaction.InputBox("Digite seu e-mail cadastrado");
                     Network net = new Network();
                     if (net.IsAvailable==true)
                     {
-                       
+                        int y = 0;
                         Random rand = new Random();
                         string s = rand.Next(100, 1000).ToString();
                         MailMessage mail = new MailMessage("projetohelpy1@outlook.com", b);
@@ -150,35 +152,40 @@ string b = Interaction.InputBox("Digite seu e-mail cadastrado");
                         {
                             try
                             {
-                                string pergunta = "";
-                                string resposta = "";
-                                string sqlAd = "Select emailUsuario,Pergunta_Seguranca.pergunta,resposta from pergunta_usuario inner join Pergunta_Seguranca on Pergunta_Seguranca.CodPergunta = pergunta_usuario.CodPergunta where emailUsuario = '" + b + "'";
-                                SQLiteDataAdapter liteDataAdapter = new SQLiteDataAdapter(sqlAd, con.sq);
-                                liteDataAdapter.Fill(dtSet, "segurança");
-                                DataTable segura = dtSet.Tables["segurança"];
-                                for(int i = 0; i < segura.Rows.Count; i++)
-                                {
-                                    DataRow linhaseg = segura.Rows[i];
-                                    if (linhaseg.ItemArray[0].ToString()==b)
-                                    {
-                                        pergunta = linhaseg.ItemArray[1].ToString();
-                                        resposta = linhaseg.ItemArray[2].ToString();
-                                    }
-                                }
-                                string teste = Interaction.InputBox(pergunta, "Mensagem do Sistema");
-                                if(teste == resposta)
-                                {
+                                DataTable table = new DataTable();
 
-                                    NovaSenha nova = new NovaSenha();
-                                    nova.Show();
-                                    
-                                }
-                                else
+                                string Sql = "SELECT Pergunta_Seguranca.pergunta,emailUsuario From pergunta_usuario inner join Pergunta_Seguranca on Pergunta_Seguranca.CodPergunta = pergunta_usuario.CodPergunta WHERE emailUsuario ='" + login[0] + "'";
+                               
+                                SQLiteDataAdapter adapter = new SQLiteDataAdapter(Sql, con.sq);
+                                adapter.Fill(table);
+                                string pergunta = "";
+                                for (int i = 0; i < table.Rows.Count; i++)
                                 {
-                                    MessageBox.Show("Resposta incorreta!", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    pergunta = table.Rows[i].ItemArray[0].ToString();
+                                };
+                                string reSposta = Interaction.InputBox(pergunta, "Pergunta de Segurança");
+                                string SQl = "Select resposta from pergunta_usuario Where emailUsuario='" + login[0] + "'AND resposta = '" + reSposta + "'";
+                                SQLiteCommand Command = new SQLiteCommand(sql, con.sq);
+                                SQLiteDataReader sQLiteDataReader;
+                                sQLiteDataReader = Command.ExecuteReader();
+                                while (sQLiteDataReader.Read())
+                                {
+                                    y++;
+                                }
+                                if (y == 1)
+                                {
+                                    NovaSenha n = new NovaSenha();
+
+                                    n.Show();
+
+
+                                }
+                                if (y == 0)
+                                {
+                                    MessageBox.Show("Resposta errada!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
-                             catch(Exception E)
+                            catch (Exception E)
                             {
                                 MessageBox.Show(E.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }

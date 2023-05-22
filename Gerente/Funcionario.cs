@@ -17,9 +17,20 @@ namespace Gerente
         public Funcionario()
         {
             InitializeComponent();
+            button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button5.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button5.BackColor = Color.Transparent;
+            button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button4.BackColor = Color.Transparent;
         }
-        private DataSet _DataSet;
+        private DataTable professor = new DataTable();
         public string discip;
+        private DataTable disciplinas = new DataTable();
         
         private void Funcionario_Load(object sender, EventArgs e)
         {
@@ -44,43 +55,27 @@ namespace Gerente
             SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(sqlite, connectDB.sq);
             SQLiteDataAdapter adapter2 = new SQLiteDataAdapter(sqLite, connectDB.sq);
             
-            _DataSet = new DataSet();
+            
             
            
-            adapter1.Fill(_DataSet, "Professor");
-            adapter2.Fill(_DataSet, "Disciplinas");
+            adapter1.Fill(professor);
+            adapter2.Fill(disciplinas);
             
         }
         private void carregaLista()
         {
 
-            DataTable Funcionario = _DataSet.Tables["Funcionario"];
-            DataTable Professor = _DataSet.Tables["Professor"];
+            
             
            
-            listView2.Items.Clear();
+            
+            dataGridView1.DataSource = professor;
 
-            for (int i = 0; i < Professor.Rows.Count; i++)
+            
+            for(int i = 0; i< disciplinas.Rows.Count;i++)
             {
-                DataRow colunaProfessor = Professor.Rows[i];
-
-
-                if (colunaProfessor.RowState != DataRowState.Deleted)
-                {
-
-                    ListViewItem lvi = new ListViewItem(colunaProfessor["Nome"].ToString());
-                    lvi.SubItems.Add(colunaProfessor["CPF"].ToString());
-                    lvi.SubItems.Add(colunaProfessor["Salario"].ToString());
-                    lvi.SubItems.Add(colunaProfessor["NomeDisciplina"].ToString());
-
-                    listView2.Items.Add(lvi);
-                }
-            }
-            DataTable Disciplinas = _DataSet.Tables["Disciplinas"];
-            for(int i = 0; i< Disciplinas.Rows.Count;i++)
-            {
-                DataRow Disciplina = Disciplinas.Rows[i];
-                comboBox1.Items.Add(Disciplina["NomeDisciplina"]);
+                DataRow Disciplina = disciplinas.Rows[i];
+                comboBox1.Items.Add(Disciplina.ItemArray[0].ToString());
             }
            
         }
@@ -117,13 +112,14 @@ namespace Gerente
                     SQLiteCommand command = new SQLiteCommand(sqlite, con.sq);
                     command.ExecuteNonQuery();
                     ListViewItem item = new ListViewItem(textBox4.Text);
-                    item.SubItems.Add(textBox8.Text);
-                    item.SubItems.Add(textBox3.Text);
-                    item.SubItems.Add(comboBox1.Text);
-                    listView2.Items.Add(item);
-                    textBox4.Clear();
-                    textBox8.Clear();
-                    textBox3.Clear();
+                    string[] dados =
+                    {
+                        textBox4.Text,
+                        textBox8.Text,
+                        textBox3.Text,
+                        discip
+                    };
+
 
                 }
                 catch (Exception E)
@@ -142,10 +138,10 @@ namespace Gerente
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataTable table = _DataSet.Tables["Disciplinas"];
-            for(int i = 0; i< table.Rows.Count;i++)
+            
+            for(int i = 0; i< disciplinas.Rows.Count;i++)
             {
-                DataRow codDisciplina = table.Rows[i];
+                DataRow codDisciplina = disciplinas.Rows[i];
                 if (comboBox1.Text == codDisciplina.ItemArray[0].ToString())
                 {
                     discip = codDisciplina.ItemArray[1].ToString();
@@ -158,15 +154,7 @@ namespace Gerente
            
         }
 
-        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(listView2.SelectedItems.Count>0)
-            {
-                textBox5.Text = listView2.SelectedItems[0].Text;
-                textBox7.Text = listView2.SelectedItems[0].Text;
-
-            }
-        }
+       
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -178,8 +166,14 @@ namespace Gerente
                 SQLiteCommand command = new SQLiteCommand(sql, con.sq);
                 command.ExecuteNonQuery();
                 con.desconectar();
-                ListViewItem item = listView2.SelectedItems[0];
-                listView2.Items.Remove(item);
+                for(int i = 0; i< professor.Rows.Count; i++)
+                {
+                    DataRow row = professor.Rows[i];
+                    if (row.ItemArray[0].ToString()==textBox5.Text)
+                    {
+                        professor.Rows.RemoveAt(i);
+                    }
+                }
             }
             catch(Exception E)
             {
@@ -199,7 +193,14 @@ namespace Gerente
                     SQLiteCommand command = new SQLiteCommand(sql, con.sq);
                     command.ExecuteNonQuery();
                     con.desconectar();
-                    listView2.SelectedItems[0].SubItems[2].Text = textBox6.Text;
+                    for(int i=0; i < professor.Rows.Count; i++)
+                    {
+                        if(professor.Rows[i].ItemArray[0].ToString()==textBox7.Text)
+                        {
+                            professor.Rows[i].ItemArray[2] = textBox6.Text;
+                            
+                        }
+                    }
                     textBox6.Clear();
 
                 }
@@ -213,6 +214,26 @@ namespace Gerente
                 MessageBox.Show("Preencha o campo de reatribuição de salário!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
            
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            textBox7.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
         }
     }
 }
