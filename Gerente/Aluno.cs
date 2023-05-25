@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xceed.Document.NET;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Gerente
@@ -18,7 +20,9 @@ namespace Gerente
         {
             InitializeComponent();
         }
-        private DataSet dataSet = new DataSet();
+        private DataTable Alunos = new DataTable();
+        private DataTable Turmas = new DataTable();
+        private DataTable Matriz = new DataTable();
         private bool status = false;
         private string periodo = "";
         private void Aluno_Load(object sender, EventArgs e)
@@ -36,16 +40,18 @@ namespace Gerente
                 Connection con = new Connection();
                 con.conectar();
                 
-                string sql = "SELECT nomeAluno,CPF,nomeResponsavel,telefoneCasa,Turma.descTurma as Turma From Aluno " +
+                string sql = "SELECT nomeAluno as Aluno,CPF,nomeResponsavel as Responsável,telefoneCasa as TelefonedeCasa,Turma.descTurma as Turma From Aluno " +
                     "Inner join Turma on Turma.CodTurma = Aluno.CodTurma ";
                 string Sql = "Select * From Turma";
                 string SqL = "Select * From Matriz";
                 SQLiteDataAdapter sQLiteData = new SQLiteDataAdapter(sql, con.sq);
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(Sql, con.sq);
                 SQLiteDataAdapter sQ = new SQLiteDataAdapter(SqL,con.sq);
-                sQLiteData.Fill(dataSet, "Alunos");
-                adapter.Fill(dataSet, "Turmas");
-                sQ.Fill(dataSet, "Matriz");
+                sQLiteData.Fill(Alunos);
+                dataGridView1.DataSource = Alunos;
+                adapter.Fill(Turmas);
+                dataGridView2.DataSource = Turmas;
+                sQ.Fill(Matriz);
               
                 con.desconectar();
             }
@@ -56,56 +62,60 @@ namespace Gerente
         }
         private void inicializar()
         {
-            DataTable aluno = dataSet.Tables["Alunos"];
-            for(int i = 0; i<aluno.Rows.Count;i++)
+            
+            
+            
+           
+            for(int i = 0; i<Matriz.Rows.Count;i++)
             {
-                DataRow linhaAluno = aluno.Rows[i];
-                if (linhaAluno.RowState != DataRowState.Deleted)
-                {
-
-                    ListViewItem lvi = new ListViewItem(linhaAluno["nomeAluno"].ToString());
-                    lvi.SubItems.Add(linhaAluno["CPF"].ToString());
-                    lvi.SubItems.Add(linhaAluno["nomeResponsavel"].ToString());
-                    lvi.SubItems.Add(linhaAluno["telefoneCasa"].ToString());
-                    lvi.SubItems.Add(linhaAluno["Turma"].ToString());
-
-                    listView1.Items.Add(lvi);
-                }
-            }
-            DataTable turmas = dataSet.Tables["Turmas"];
-        
-            for(int i = 0; i<turmas.Rows.Count;i++)
-            {
-                DataRow linhaTurmas = turmas.Rows[i];
-                comboBox1.Items.Add(linhaTurmas.ItemArray[2].ToString());
-                comboBox2.Items.Add(linhaTurmas.ItemArray[2].ToString());
-                ListViewItem item = new ListViewItem(linhaTurmas.ItemArray[0].ToString());
-                item.SubItems.Add(linhaTurmas.ItemArray[1].ToString());
-                item.SubItems.Add(linhaTurmas.ItemArray[2].ToString());
-                listView2.Items.Add(item);
-            }
-            DataTable matriz = dataSet.Tables["Matriz"];
-            for(int i = 0; i<matriz.Rows.Count;i++)
-            {
-                DataRow linhaMatriz = matriz.Rows[i];
+                DataRow linhaMatriz = Matriz.Rows[i];
                 comboBox4.Items.Add(linhaMatriz.ItemArray[0].ToString());
                
             }
+            for(int i = 0; i<Turmas.Rows.Count;i++)
+            {
+                DataRow linhaTurma = Turmas.Rows[i];
+                comboBox2.Items.Add(linhaTurma.ItemArray[2].ToString());
+                comboBox1.Items.Add(linhaTurma.ItemArray[2].ToString());
+            }
+            comboBox1.Items.Add("Todas");
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            
-                DataTable alunos = dataSet.Tables["Alunos"];
-                DataRow[] resultados = alunos.Select("Turma ='" + comboBox1.Text + "'");
-                listView1.Items.Clear();
-                for(int i = 0; i<resultados.Length;i++)
+               
+            DataTable a = new DataTable();
+            a.Columns.Add("Nome do Aluno");
+            a.Columns.Add("CPF");
+            a.Columns.Add("Nome do Responsável");
+            a.Columns.Add("Telefone de Casa");
+            a.Columns.Add("Turma");
+            if (comboBox1.SelectedItem.ToString() == "Todas")
+            {
+                dataGridView1.DataSource = Alunos;
+            }
+            else
+            {
+                DataRow[] resultados = Alunos.Select("Turma ='" + comboBox1.Text + "'");
+                for (int i = 0; i < resultados.Length; i++)
                 {
-                    ListViewItem item = new ListViewItem(resultados[i][0].ToString());
-                    item.SubItems.Add(resultados[i][1].ToString());
-                    item.SubItems.Add(resultados[i][2].ToString());
-                    item.SubItems.Add(resultados[i][3].ToString());
-                    listView1.Items.Add(item);
+                    string[] results =
+                    {
+                    resultados[i][0].ToString(),
+                    resultados[i][1].ToString(),
+                    resultados[i][2].ToString(),
+                    resultados[i][3].ToString(),
+                    resultados[i][4].ToString()
+
+                };
+                    a.Rows.Add(results);
+
                 }
+                dataGridView1.DataSource = a;
+            }
+
+            
+        
             
             
         }
@@ -139,12 +149,12 @@ namespace Gerente
                 {
                     Connection con = new Connection();
                     con.conectar();
-                    DataTable turmas = dataSet.Tables["Turmas"];
+                  
                     int codTurma = 0;
-                    for(int i = 0; i<turmas.Rows.Count;i++)
+                    for(int i = 0; i<Turmas.Rows.Count;i++)
                     {
-                        DataRow linhaturma = turmas.Rows[i];
-                        if (linhaturma.ItemArray[1].ToString() == comboBox2.SelectedItem.ToString()) ;
+                        DataRow linhaturma = Turmas.Rows[i];
+                        if (linhaturma.ItemArray[2].ToString() == comboBox2.SelectedItem.ToString()) 
                         {
                             codTurma = int.Parse(linhaturma.ItemArray[0].ToString());
                         }
@@ -153,7 +163,16 @@ namespace Gerente
                     SQLiteCommand command = new SQLiteCommand(SQL, con.sq);
                     command.ExecuteNonQuery();
                     con.desconectar();
+                    string[] valores =
+                    {
+                        textBox1.Text,
+                        maskedTextBox2.Text,
+                        textBox3.Text,
+                        maskedTextBox1.Text,
+                        codTurma.ToString()
+                    };
 
+                    Alunos.Rows.Add(valores);
                     textBox1.Clear();
                     maskedTextBox1.Clear();
                     maskedTextBox2.Clear();
@@ -244,6 +263,57 @@ namespace Gerente
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             label12.Text = comboBox4.Text;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "xlsx files (*.xlsx)|*.xlsx";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string a = openFileDialog1.FileName;
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.Commercial;
+
+                var package = new ExcelPackage(a);
+                var workbook = package.Workbook;
+
+                var sheets = workbook.Worksheets[0];
+                DataTable table = new DataTable();
+
+                table = sheets.Cells["A:E"].ToDataTable();
+                for(int i = 0; i<table.Rows.Count;i++)
+                {
+                    DataRow row = table.Rows[i];
+                    try
+                    {
+                        Connection con = new Connection();
+                        con.conectar();
+                        string sql = "INSERT INTO Aluno VALUES ('" + row.ItemArray[0].ToString() + "','" + row.ItemArray[1].ToString() + "','" + row.ItemArray[2].ToString() + "','" + row.ItemArray[3].ToString() + "','" + row.ItemArray[4].ToString() + "')";
+                        SQLiteCommand comm = new SQLiteCommand(sql, con.sq);
+                        comm.ExecuteNonQuery();
+                        string[] valores =
+                        {
+                            row.ItemArray[0].ToString(),
+                            row.ItemArray[1].ToString(),
+                            row.ItemArray[2].ToString(),
+                            row.ItemArray[3].ToString(),
+                            row.ItemArray[4].ToString()
+                        };
+                        Alunos.Rows.Add(valores);
+                        
+                    }
+                    catch(Exception E)
+                    {
+                        MessageBox.Show(E.Message);
+                    }
+                }
+
+                
+
+
+
+            }
+
         }
     }
 }

@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,51 +54,17 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.Turma = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label9 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(545, 66);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(357, 272);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Nome";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "CPF";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Nome do Responsável";
-            this.columnHeader3.Width = 115;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Telefone de Casa";
-            this.columnHeader4.Width = 114;
             // 
             // label1
             // 
@@ -367,41 +328,6 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Código de Turma:";
             // 
-            // listView2
-            // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Turma,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8});
-            this.listView2.GridLines = true;
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(545, 367);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(357, 272);
-            this.listView2.TabIndex = 16;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
-            // 
-            // Turma
-            // 
-            this.Turma.Text = "Turma";
-            this.Turma.Width = 69;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Matriz";
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Descrição";
-            this.columnHeader7.Width = 115;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Período";
-            this.columnHeader8.Width = 114;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -419,6 +345,7 @@
             this.button3.TabIndex = 18;
             this.button3.Text = "Importar planilha do excel";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label12
             // 
@@ -429,21 +356,41 @@
             this.label12.TabIndex = 19;
             this.label12.Text = "label12";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(545, 78);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(325, 260);
+            this.dataGridView1.TabIndex = 20;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(545, 367);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(325, 292);
+            this.dataGridView2.TabIndex = 21;
+            // 
             // Aluno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 677);
             this.ControlBox = false;
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.listView2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Aluno";
             this.Text = "Aluno";
@@ -452,18 +399,14 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
@@ -489,14 +432,12 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ColumnHeader Turma;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
