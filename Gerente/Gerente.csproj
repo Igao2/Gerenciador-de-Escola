@@ -165,6 +165,12 @@
     <Compile Include="QRcode.Designer.cs">
       <DependentUpon>QRcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registrar horario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar horario.Designer.cs">
+      <DependentUpon>Registrar horario.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Aluno.resx">
       <DependentUpon>Aluno.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +213,9 @@
     </Compile>
     <EmbeddedResource Include="QRcode.resx">
       <DependentUpon>QRcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar horario.resx">
+      <DependentUpon>Registrar horario.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
