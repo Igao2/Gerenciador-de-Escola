@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,21 +24,32 @@ namespace Gerente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            DateTime dt1 = DateTime.ParseExact(maskedTextBox1.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime dt2 = DateTime.Today;
+            if(dt1<dt2)
             {
-                Connection con = new Connection();
-                con.conectar();
-                string Sql = "INSERT INTO Calendario(Evento,Data) VALUES('" + textBox1.Text + "','" + maskedTextBox1.Text + "')";
-                SQLiteCommand command = new SQLiteCommand(Sql, con.sq);
-                command.ExecuteNonQuery();
-                ListViewItem list = new ListViewItem(textBox1.Text);
-                list.SubItems.Add(maskedTextBox1.Text);
-                listView1.Items.Add(list);
+                MessageBox.Show("Data Inválida!","Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message.ToString());
+                try
+                {
+                    Connection con = new Connection();
+                    con.conectar();
+                    string Sql = "INSERT INTO Calendario(Evento,Data) VALUES('" + textBox1.Text + "','" + maskedTextBox1.Text + "')";
+                    SQLiteCommand command = new SQLiteCommand(Sql, con.sq);
+                    command.ExecuteNonQuery();
+                    ListViewItem list = new ListViewItem(textBox1.Text);
+                    list.SubItems.Add(maskedTextBox1.Text);
+                    monthCalendar2.AddBoldedDate(dt1);
+                    listView1.Items.Add(list);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
             }
+            
         }
 
         private void Calendario_Load(object sender, EventArgs e)
@@ -122,7 +134,7 @@ namespace Gerente
                 }
 
                 var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
-                doc.InsertParagraph(texto);
+                doc.InsertParagraph(monthCalendar2.SelectionStart.ToString(texto));
                 doc.Save();
 
             }

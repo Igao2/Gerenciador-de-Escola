@@ -114,6 +114,12 @@
       <DependentUpon>Contas.cs</DependentUpon>
     </Compile>
     <Compile Include="Criptografia.cs" />
+    <Compile Include="Esqueci.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Esqueci.Designer.cs">
+      <DependentUpon>Esqueci.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Contas.resx">
       <DependentUpon>Contas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Esqueci.resx">
+      <DependentUpon>Esqueci.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

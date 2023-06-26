@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,6 +27,9 @@ namespace Gerente
 
         private void Registrar_horario_Load(object sender, EventArgs e)
         {
+            groupBox1.Hide();
+            button4.Hide();
+            button5.Hide();
             try
             {
                 Connection con = new Connection();
@@ -88,11 +93,14 @@ namespace Gerente
             int countMateria = 0;
 
             preencher(numero);
-           
+            
             
 
            
             dataGridView1.DataSource = horario;
+            button4.Show();
+          
+            Ver(true);
         }
         private void preencher(int numero)
         {
@@ -297,6 +305,66 @@ namespace Gerente
                 }
             }
         }
+        private void Ver(bool inicio)
+        {
+            dataGridView3.Rows.Clear();
+            List<Tuple<string, int>> contador = new List<Tuple<string, int>>();
+            string texto = "Faltam a quantidade relatada de aulas das seguintes matérias:";
+            for(int i = 0; i< disponbilidade.Rows.Count; i++)
+            {
+                DataRow disp = disponbilidade.Rows[i];
+                int a = int.Parse(disp["CH"].ToString());
+
+                int contas = a / 4;
+                double conta = Math.Round((double)contas);
+                int count = 0;
+                foreach(DataRow dr in horario.Rows)
+                {
+                    if (dr["Segunda"].ToString() == disp["Disciplina"].ToString())
+                    {
+                        count++;
+                    }
+                    if (dr["Terca"].ToString() == disp["Disciplina"].ToString())
+                    {
+                        count++;
+                    }
+                    if (dr["Quarta"].ToString() == disp["Disciplina"].ToString())
+                    {
+                        count++;
+                    }
+                    if (dr["Quinta"].ToString() == disp["Disciplina"].ToString())
+                    {
+                        count++;
+                    }
+                    if (dr["Sexta"].ToString() == disp["Disciplina"].ToString())
+                    {
+                        count++;
+                    }
+                    
+                }
+                if ((int)conta > count)
+                {
+                    int x = (int)conta - count;
+                    contador.Add(Tuple.Create(disp["Disciplina"].ToString(), x));
+
+                }
+            }
+            for(int j = 0; j < contador.Count; j ++)
+            {
+                string[] valores =
+                {
+                    contador[j].Item1,
+                    contador[j].Item2.ToString()
+                };
+                dataGridView3.Rows.Add(valores);
+                texto = texto +"\n Matéria: "+ contador[j].Item1+ " Quantidade: " + contador[j].Item2;
+            }
+            if (inicio)
+            {
+                MessageBox.Show(texto, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            groupBox1.Show();
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -404,6 +472,66 @@ namespace Gerente
             {
                 MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "xlsx|*.xlsx|xls|*.xls";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string a = saveFileDialog1.FileName;
+                ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.Commercial;
+                var package = new ExcelPackage(a);
+                var workbook = package.Workbook;
+                workbook.Worksheets.Add("Horário "+comboBox1.Text);
+                var sheets = workbook.Worksheets[0];
+                for (int i = 0; i < horario.Columns.Count; i++)
+                {
+                    sheets.Cells[1, i + 1].Value = horario.Columns[i].ColumnName;
+                }
+
+
+                for (int row = 0; row < horario.Rows.Count; row++)
+                {
+                    for (int col = 0; col < horario.Columns.Count; col++)
+                    {
+                        sheets.Cells[row + 2, col + 1].Value = horario.Rows[row][col];
+                    }
+                }
+
+                package.SaveAs(a);
+
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ReadOnly = false;
+            button5.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ReadOnly = true;
+            button5.Hide();
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                
+                var newValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                horario.Rows[e.RowIndex][e.ColumnIndex] = newValue;
+            }
+            
+            Ver(false);
         }
     }
 }

@@ -74,3 +74,4 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Cadastr
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.NovaSenha.resources
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Form3.resources
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Registrar_horario.resources
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Esqueci.resources
