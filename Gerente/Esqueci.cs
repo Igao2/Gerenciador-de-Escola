@@ -136,11 +136,12 @@ namespace Gerente
         private void button2_Click(object sender, EventArgs e)
         {
             GetSet get = new GetSet();
-
+            
             string b = Interaction.InputBox("Digite seu e-mail cadastrado");
             get.seta(b);
             QRcode qrcode = new QRcode();
             qrcode.Show();
+            this.Close();
         }
     }
 }
