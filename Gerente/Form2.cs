@@ -150,17 +150,49 @@ namespace Gerente
         <html>
         <head>
             <meta charset='utf-8' />
-            <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js'></script>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+             <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
+            <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
         </head>
         <body>
+            <div id='calendarcontainer'>
             <div id='calendar'></div>
+            </div>
+            <style>
+                html, body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+                font-size: 14px;
+                }
+
+                #calendar {
+                max-width: 1100px;
+                margin: 40px auto;
+                }
+            </style>
+            <script src='fullcalendar/dist/index.global.js'></script>
             <script>
-                $(document).ready(function() {
-                    $('#calendar').fullCalendar({
-                        events: [");
+                document.addEventListener('DOMContentLoaded', function() {
+                 var calendarEl = document.getElementById('calendar');
+                 var calendar = new FullCalendar.Calendar(calendarEl, {
+                 themeSystem: 'bootstrap5',
+                 headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      
+                },
+                 buttonText: { 
+                month: ""Mês"",
+                week: ""Semana"",
+                day: ""Dia"",
+                today: ""Hoje""
+                },
+   
+     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    locale:'PT-BR',
+                 events: [");
 
                 foreach (DataRow row in calendario.Rows)
                 {
@@ -184,6 +216,7 @@ namespace Gerente
 
                 html.Append(@"]
                     });
+ calendar.render();
                 });
             </script>
         </body>
