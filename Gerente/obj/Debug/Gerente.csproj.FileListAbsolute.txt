@@ -75,3 +75,13 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.NovaSen
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Form3.resources
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Registrar_horario.resources
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Esqueci.resources
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Markdig.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Buffers.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Memory.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Markdig.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Buffers.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Memory.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

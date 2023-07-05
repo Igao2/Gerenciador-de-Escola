@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xceed.Words.NET;
+using Markdig;
+using Xceed.Document.NET;
 
 namespace Gerente
 {
@@ -26,41 +28,133 @@ namespace Gerente
         private void button1_Click(object sender, EventArgs e)
         {
             
-
-            DateTime dt1 = DateTime.ParseExact(maskedTextBox1.Text,"dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime dt3 = DateTime.ParseExact(maskedTextBox2.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime dt2 = DateTime.Today;
-            if(dt1<dt2||dt3<dt2)
+            if(textBox1.Text !="" && maskedTextBox1.Text != "" && maskedTextBox2.Text != "")
             {
-                MessageBox.Show("Data Inválida!","Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                DateTime dt1 = DateTime.ParseExact(maskedTextBox1.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime dt3 = DateTime.ParseExact(maskedTextBox2.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime dt2 = DateTime.Today;
+                if (dt1 < dt2 || dt3 < dt2)
+                {
+                    MessageBox.Show("Data Inválida!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    try
+                    {
+                        if (Mensal.Checked)
+                        {
+                            int mesatual = dt1.Month;
+                            int z = 1;
+                            for (int i = mesatual; i < 13; i++)
+                            {
+                                if (i > mesatual)
+                                {
+                                    dt1 = dt1.AddMonths(z);
+                                    dt3 = dt3.AddMonths(z);
+                                }
+
+                                Connection conn = new Connection();
+                                conn.conectar();
+                                string Sqlç = "INSERT INTO Calendario VALUES('" + textBox1.Text + "','" + dt1.ToShortDateString() + "','" + dt3.ToShortDateString() + "')";
+                                SQLiteCommand commandd = new SQLiteCommand(Sqlç, conn.sq);
+                                commandd.ExecuteNonQuery();
+
+                                string[] valoress =
+                                {
+                                textBox1.Text,
+                                dt1.ToShortDateString(),
+                                dt3.ToShortDateString()
+                            };
+                                calendario.Rows.Add(valoress);
+                                monthCalendar2.AddBoldedDate(dt1);
+                                monthCalendar2.AddBoldedDate(dt3);
+
+
+                            }
+
+
+                            monthCalendar2.UpdateBoldedDates();
+                            maskedTextBox1.Clear();
+                            textBox1.Clear();
+                            maskedTextBox2.Clear();
+                           
+                            
+                        }
+                        if (Anual.Checked)
+                        {
+                            int Anoatual = dt1.Year;
+                            int ano = DateTime.Now.Year;
+                            int anoMaximo = ano + 3;
+                            int z = 1;
+                            for (int i = Anoatual; i < anoMaximo; i++)
+                            {
+                                if (i > Anoatual)
+                                {
+                                    dt1 = dt1.AddYears(z);
+                                    dt3 = dt3.AddYears(z);
+                                }
+
+                                Connection conn = new Connection();
+                                conn.conectar();
+                                string Sqlç = "INSERT INTO Calendario VALUES('" + textBox1.Text + "','" + dt1.ToShortDateString() + "','" + dt3.ToShortDateString() + "')";
+                                SQLiteCommand commandd = new SQLiteCommand(Sqlç, conn.sq);
+                                commandd.ExecuteNonQuery();
+
+                                string[] valoress =
+                                {
+                                textBox1.Text,
+                                dt1.ToShortDateString(),
+                                dt3.ToShortDateString()
+                            };
+                                calendario.Rows.Add(valoress);
+                                monthCalendar2.AddBoldedDate(dt1);
+                                monthCalendar2.AddBoldedDate(dt3);
+
+
+                            }
+
+
+                            monthCalendar2.UpdateBoldedDates();
+                            maskedTextBox1.Clear();
+                            textBox1.Clear();
+                            maskedTextBox2.Clear();
+                            
+                        }
+                        if (!Mensal.Checked && !Anual.Checked)
+                        {
+                            Connection con = new Connection();
+                            con.conectar();
+                            string Sql = "INSERT INTO Calendario VALUES('" + textBox1.Text + "','" + maskedTextBox1.Text + "','" + maskedTextBox2.Text + "')";
+                            SQLiteCommand command = new SQLiteCommand(Sql, con.sq);
+                            command.ExecuteNonQuery();
+                            string[] valores =
+                            {
+                        textBox1.Text,
+                        dt1.ToShortDateString(),
+                        dt2.ToShortDateString()
+                    };
+                            calendario.Rows.Add(valores);
+                            monthCalendar2.AddBoldedDate(dt1);
+                            monthCalendar2.AddBoldedDate(dt3);
+                            monthCalendar2.UpdateBoldedDates();
+                            maskedTextBox1.Clear();
+                            textBox1.Clear();
+                            maskedTextBox2.Clear();
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString(), "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             else
             {
-                try
-                {
-                    Connection con = new Connection();
-                    con.conectar();
-                    string Sql = "INSERT INTO Calendario VALUES('" + textBox1.Text + "','" + maskedTextBox1.Text+ "','"+maskedTextBox2.Text+"')";
-                    SQLiteCommand command = new SQLiteCommand(Sql, con.sq);
-                    command.ExecuteNonQuery();
-                    string[] valores =
-                    {
-                        textBox1.Text,
-                        maskedTextBox1.Text,
-                        maskedTextBox2.Text
-                    };
-                    calendario.Rows.Add(valores);
-                    monthCalendar2.AddBoldedDate(dt1);
-                    monthCalendar2.AddBoldedDate(dt3);
-                    maskedTextBox1.Clear();
-                    textBox1.Clear();
-                    maskedTextBox2.Clear();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString(),"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Preencha todos os campos", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            Anual.Checked = false;
+            Mensal.Checked = false;
             
         }
 
@@ -70,12 +164,19 @@ namespace Gerente
             {
                 Connection con = new Connection();
                 con.conectar();
-                string sql = "SELECT * FROM Calendario";
+                string sql = "SELECT * from Calendario order by julianday(substr(DataInicio, 7, 4) || '-' || substr(DataInicio, 4, 2) || '-' || substr(DataInicio, 1, 2)) ASC";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
                 adapter.Fill(calendario);
                 con.desconectar();
                 dataGridView1.DataSource = calendario;
-
+                foreach(DataRow row in calendario.Rows)
+                {
+                    DateTime dt1 = DateTime.ParseExact(row["DataInicio"].ToString(),"dd/MM/yyyy",CultureInfo.InvariantCulture);
+                    DateTime dt2 = DateTime.ParseExact(row["DataTermino"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    monthCalendar2.AddBoldedDate(dt2);
+                    monthCalendar2.AddBoldedDate(dt1);
+                    monthCalendar2.UpdateBoldedDates();
+                }
             }
             catch(Exception Err)
             {
@@ -84,7 +185,11 @@ namespace Gerente
            
         }
        
-        
+        private string negritar(string b)
+        {
+            string c = Markdown.ToHtml("**" + b+"**");
+            return c;
+        }
        
 
         private void button2_Click(object sender, EventArgs e)
@@ -93,17 +198,22 @@ namespace Gerente
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string nomearquivo = saveFileDialog1.FileName;
-                string texto = "";
+                string texto = "\n"+ "Calendário "+DateTime.Now.Year.ToString()+ "\n";
+                string data = "Data de início: ";
+                string data2 = "Data de término: ";
+                var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
+                doc.InsertParagraph(texto).FontSize(25).Font("Arial");
                 foreach (DataRow row in  calendario.Rows)
                 {
-                    
-                    texto = texto  + row["Evento"] + "  " + row["DataInicio"] + "até "+ row["DataTermino"]+"\n";
-
-
+                    texto = "";
+                    texto = texto + " \n" + row["Evento"] + "\n";
+                    Paragraph paragraph = doc.InsertParagraph(texto).FontSize(14).Font("Arial");
+                    paragraph.Append(data).Bold().FontSize(12).Font("Arial").Append(row["DataInicio"].ToString()).FontSize(14).Append("\n");
+                    paragraph.Append(data2).Bold().FontSize(12).Font("Arial").Append(row["DataTermino"].ToString()).FontSize(14).Append("\n");
                 }
 
-                var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
-                doc.InsertParagraph(texto);
+                
+                
                 doc.Save();
 
             }
@@ -127,7 +237,7 @@ namespace Gerente
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            e.Graphics.DrawString(Properties.Settings.Default.Eventos,new Font("Arial",12), Brushes.Black,new PointF(100,100));
+            e.Graphics.DrawString(Properties.Settings.Default.Eventos,new System.Drawing.Font("Arial",12), Brushes.Black,new PointF(100,100));
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -227,6 +337,46 @@ namespace Gerente
 
            
 
+        }
+
+        private void monthCalendar2_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            label4.Text = "";
+            foreach(DataRow row in calendario.Rows)
+            {
+                
+                DateTime inicio = DateTime.ParseExact(row["DataInicio"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime final = DateTime.ParseExact(row["DataTermino"].ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                if (monthCalendar2.SelectionStart == inicio && inicio != final)
+                {
+                    label4.Text = label4.Text+"\n"+ row["DataInicio"].ToString()+" "+row["Evento"].ToString();
+                }
+                if (monthCalendar2.SelectionStart == final)
+                {
+                    label4.Text =  label4.Text+"\n"+row["DataTermino"].ToString() + " " + row["Evento"].ToString();
+                }
+                if(monthCalendar2.SelectionStart > inicio && monthCalendar2.SelectionStart < final)
+                {
+                    label4.Text =  label4.Text +"\n"+ monthCalendar2.SelectionStart.ToShortDateString()+ " " + row["Evento"].ToString();
+                }
+                
+            }
+        }
+
+        private void Mensal_CheckedChanged(object sender, EventArgs e)
+        {
+            if(Mensal.Checked)
+            {
+                Anual.Checked = false;
+            }
+        }
+
+        private void Anual_CheckedChanged(object sender, EventArgs e)
+        {
+            if(Anual.Checked)
+            {
+                Mensal.Checked = false;
+            }
         }
     }
 }
