@@ -25,13 +25,36 @@ namespace Gerente
         {
             InitializeComponent();
         }
+        private DataTable disciplinas = new DataTable();
+        private DataTable matriz = new DataTable();
        
         private void Horario_Load(object sender, EventArgs e)
         {
-            
-            Connection con = new Connection();
-            con.conectar();
 
+            try
+            {
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "Select * From Disciplinas";
+                string Sql = "Select * From Matriz";
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
+                SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(Sql, con.sq);
+
+                adapter.Fill(disciplinas);
+                adapter1.Fill(matriz);
+                comboBox1.DataSource = matriz;
+                comboBox1.DisplayMember = "CodMatriz";
+                comboBox1.ValueMember = "CodMatriz";
+                comboBox3.DataSource = disciplinas;
+                comboBox3.DisplayMember = "NomeDisciplina";
+                comboBox3.ValueMember = "CodDisciplina";
+                con.desconectar();
+
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -88,11 +111,31 @@ namespace Gerente
             Registrar_horario reg = new Registrar_horario();
             reg.Show();
         }
-            
-            
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "INSERT INTO Disciplinas Values('" + textBox10.Text + "','" + textBox3.Text + "','" + textBox4.Text + "')";
+                SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                command.ExecuteNonQuery();
+                string[] valores =
+                {
+                    textBox10.Text,textBox3.Text,textBox4.Text
+                };
+                disciplinas.Rows.Add(valores);
+                textBox10.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+    }
 
        
 

@@ -85,3 +85,4 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Buffers.
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Memory.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Ocorrencias.resources

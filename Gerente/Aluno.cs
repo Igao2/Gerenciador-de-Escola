@@ -20,7 +20,7 @@ namespace Gerente
         {
             InitializeComponent();
         }
-        private DataTable Alunos = new DataTable();
+        public DataTable Alunos = new DataTable();
         private DataTable Turmas = new DataTable();
         private DataTable Matriz = new DataTable();
         private bool status = false;
@@ -314,6 +314,17 @@ namespace Gerente
 
             }
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = Alunos;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Ocorrencias oc = new Ocorrencias();
+            oc.Show();
         }
     }
 }

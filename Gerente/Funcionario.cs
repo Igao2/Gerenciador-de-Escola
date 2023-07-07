@@ -235,5 +235,10 @@ namespace Gerente
         {
             textBox7.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
