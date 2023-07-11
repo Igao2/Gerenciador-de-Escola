@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace Gerente
 {
@@ -29,7 +31,7 @@ namespace Gerente
                 Connection con = new Connection();
                 con.conectar();
                 string sql = "Select nomeAluno as Aluno,CodAluno from Aluno";
-                string Sql = "SELECT Aluno.nomeAluno as Aluno,Motivo,Turma.descTurma,Data as Turma from Ocorrencias \r\ninner join Aluno on Aluno.CodAluno = Ocorrencias.CodAluno\r\ninner join Turma on Turma.CodTurma = Aluno.CodTurma";
+                string Sql = "SELECT Aluno.nomeAluno as Aluno,Motivo,Turma.descTurma as Turma,Data from Ocorrencias \r\ninner join Aluno on Aluno.CodAluno = Ocorrencias.CodAluno\r\ninner join Turma on Turma.CodTurma = Aluno.CodTurma";
                 string sQL = "SELECT Aluno.nomeAluno as Aluno,ES,Motivo,Turma.descTurma,Data as Turma from SuspExp \r\ninner join Aluno on Aluno.CodAluno = SuspExp.CodAluno\r\ninner join Turma on Turma.CodTurma = Aluno.CodTurma";
                 SQLiteDataAdapter sQLiteData = new SQLiteDataAdapter(sQL, con.sq);
                 sQLiteData.Fill(suspexp);
@@ -173,6 +175,37 @@ namespace Gerente
             {
                 MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(dataGridView2.SelectedRows.Count>0)
+            {
+                saveFileDialog1.Filter = "docx files (*.docx)|*.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string nomearquivo = saveFileDialog1.FileName;
+                    string texto = "\r\nOcorrência Escolar";
+                    var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
+                    doc.InsertParagraph(texto).FontSize(25).Font("Arial");
+                    string[] valores =
+                    {
+                     dataGridView2.SelectedRows[0].Cells[0].Value.ToString(),
+                    dataGridView2.SelectedRows[0].Cells[1].Value.ToString(),
+                    dataGridView2.SelectedRows[0].Cells[2].Value.ToString(),
+                    dataGridView2.SelectedRows[0].Cells[3].Value.ToString()
+                };
+
+                    doc.InsertParagraph("\r\n\r\nData: " + valores[3] + "\r\n\r\nAluno(a): " + valores[0] + "\r\nTurma: " + valores[2] + "\r\n\r\nDescrição da Ocorrência:\r\n" + valores[1] + "\r\n\r\n\r\nAssinatura do Professor(a): _______________________ \r\n\r\r\n\r\nAssinatura do Responsável:_______________________").FontSize(14).Font("Arial");
+                    doc.Save();
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhuma Ocorrência Selecionada!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
     }
 }

@@ -48,6 +48,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.button4 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -229,11 +231,22 @@
             this.dataGridView3.Size = new System.Drawing.Size(334, 198);
             this.dataGridView3.TabIndex = 19;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(662, 24);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(103, 36);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "Gerar Ocorrência";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Ocorrencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 659);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.maskedTextBox2);
@@ -287,5 +300,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
