@@ -16,7 +16,7 @@ namespace Gerente
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Aluno());
+            Application.Run(new Registrar_horario());
         }
     }
 }

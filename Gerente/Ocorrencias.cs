@@ -196,7 +196,7 @@ namespace Gerente
                     dataGridView2.SelectedRows[0].Cells[3].Value.ToString()
                 };
 
-                    doc.InsertParagraph("\r\n\r\nData: " + valores[3] + "\r\n\r\nAluno(a): " + valores[0] + "\r\nTurma: " + valores[2] + "\r\n\r\nDescrição da Ocorrência:\r\n" + valores[1] + "\r\n\r\n\r\nAssinatura do Professor(a): _______________________ \r\n\r\r\n\r\nAssinatura do Responsável:_______________________").FontSize(14).Font("Arial");
+                    doc.InsertParagraph("\r\n\r\nData: " + valores[3] + "\r\n\r\nAluno(a): " + valores[0] + "\r\nTurma: " + valores[2] + "\r\n\r\nMotivo da Ocorrência:\r\n" + valores[1] + "\r\n\r\n\r\nAssinatura do Professor(a): _______________________ \r\n\r\r\n\r\nAssinatura do Responsável:_______________________").FontSize(14).Font("Arial");
                     doc.Save();
 
                 }
@@ -206,6 +206,78 @@ namespace Gerente
                 MessageBox.Show("Nenhuma Ocorrência Selecionada!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                saveFileDialog1.Filter = "docx files (*.docx)|*.docx";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string nomearquivo = saveFileDialog1.FileName;
+                    var doc = DocX.Create(nomearquivo, Xceed.Document.NET.DocumentTypes.Document);
+                    if (dataGridView3.SelectedRows[0].Cells[1].Value.ToString()=="E")
+                    {
+                        
+                        string texto = "\nExpulsão";
+                        
+                        doc.InsertParagraph(texto).FontSize(25).Font("Arial");
+                        string[] valores =
+                        {
+                     dataGridView3.SelectedRows[0].Cells[0].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[1].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[2].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[3].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[4].Value.ToString()
+                    };
+                        doc.InsertParagraph("\r\n\r\nData: " + valores[4] + "\r\n\r\nAluno(a): " + valores[0] + "\r\nTurma: " + valores[3] + "\r\n\r\nMotivo da Expulsão:\r\n" + valores[2] + "\r\n\r\n\r\nAssinatura do Professor(a): _______________________ \r\n\r\r\nAssinatura do Responsável:_______________________").FontSize(14).Font("Arial");
+                        doc.Save();
+
+                    }
+                    if (dataGridView3.SelectedRows[0].Cells[1].Value.ToString()=="S")
+                    {
+                        string texto = "\nSuspensão";
+
+                        doc.InsertParagraph(texto).FontSize(25).Font("Arial");
+                        string[] valores =
+                        {
+                     dataGridView3.SelectedRows[0].Cells[0].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[1].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[2].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[3].Value.ToString(),
+                    dataGridView3.SelectedRows[0].Cells[4].Value.ToString()    
+                        };
+                        doc.InsertParagraph("\r\n\r\nData: " + valores[4] + "\r\n\r\nAluno(a): " + valores[0] + "\r\nTurma: " + valores[3] + "\r\n\r\nMotivo da Suspensão:\r\n" + valores[2] + "\r\n\r\n\r\nAssinatura do Diretor(a): _______________________ \r\n\r\r\nAssinatura do Responsável:_______________________").FontSize(14).Font("Arial");
+                        doc.Save();
+
+                    }
+
+                    
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhuma Suspensão/Expulsão Selecionada!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow clickedRow = dataGridView3.Rows[e.RowIndex];
+            clickedRow.Selected = true;
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow clickedRow = dataGridView2.Rows[e.RowIndex];
+            clickedRow.Selected = true;
         }
     }
 }
