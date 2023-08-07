@@ -17,7 +17,7 @@ namespace Gerente
         {
             InitializeComponent();
         }
-        private DataSet _DataSet;
+        private DataTable contas = new DataTable();
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
@@ -43,15 +43,28 @@ namespace Gerente
         {
             label3.Text = "R$ "+Properties.Settings.Default.Caixa.ToString();
             label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
-            inicializar();
-            carregardados();
-            carregaLista();
-            int valor = 0;
-            for(int i = 0;i<listView1.Items.Count;i++)
+
+            try
             {
-                if(listView1.Items[i].SubItems[3].Text == "Pendente")
+                Connection con = new Connection();
+                con.conectar();
+                string sql = "SELECT * FROM Contas";
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
+                adapter.Fill(contas);
+                dataGridView1.DataSource = contas;
+                con.desconectar();
+
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message,"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            int valor = 0;
+            foreach(DataRow row in contas.Rows)
+            {
+                if (row["Status"].ToString()=="Pendente")
                 {
-                    valor = valor + int.Parse(listView1.Items[i].SubItems[1].Text);
+                    valor = valor + int.Parse(row["Valor"].ToString());
                     Properties.Settings.Default.Pagpen = valor;
                     Properties.Settings.Default.Save();
                     label3.Text = "R$ " + Properties.Settings.Default.Caixa.ToString();
@@ -60,33 +73,12 @@ namespace Gerente
             DateTime dt = new DateTime();
                 dt = DateTime.Now.Date;
                
-                if (listView1.Items[i].SubItems[2].Text == dt.ToShortDateString() && listView1.Items[i].SubItems[3].Text=="Pendente")
+                if (row["Vencimento"].ToString() == dt.ToShortDateString() && row["Status"].ToString() =="Pendente")
                 {
-                    
-                        richTextBox1.Text = richTextBox1.Text + "\n" + listView1.Items[i].Text;
+
+                    richTextBox1.Text = richTextBox1.Text + "\n" + row["Conta"].ToString();
                 }
-                string[] sla = listView1.Items[i].SubItems[2].Text.Split('/');
-                int dia = int.Parse(sla[0]);
-                int mes = int.Parse(sla[1]);
-                int ano = int.Parse(sla[2]);
-                DateTime dateTime = new DateTime(ano, mes, dia);
-                if (dt>=dateTime && listView1.Items[i].SubItems[3].Text == "Pago")
-                {
-                    try
-                    {
-                        string pago = "Pago";
-                        Connection con  = new Connection();
-                        con.conectar();
-                        string sql = "DELETE FROM Contas WHERE Vencimento = '" + listView1.Items[i].SubItems[2].Text +"'AND Status = '"+pago+"'";
-                        SQLiteCommand command = new SQLiteCommand(sql, con.sq);
-                        command.ExecuteNonQuery();
-                        listView1.Items.RemoveAt(i);
-                    }
-                    catch(Exception E)
-                    {
-                        MessageBox.Show(E.Message);
-                    }
-                }
+                
                 
             }
 
@@ -113,11 +105,12 @@ namespace Gerente
                 string sqInsert = "INSERT INTO Contas(Conta,Valor,Vencimento,Status) VALUES('" + textBox1.Text + "','" + textBox2.Text + "','" + dateTimePicker1.Text + "','" + status + "')";
                 SQLiteCommand command = new SQLiteCommand(sqInsert,con.sq);
                 command.ExecuteNonQuery();
-                ListViewItem list = new ListViewItem(textBox1.Text);
-                list.SubItems.Add(textBox2.Text);
-                list.SubItems.Add(dateTimePicker1.Text);
-                list.SubItems.Add(status);
-                listView1.Items.Add(list);
+                string[] valores =
+                {
+                    textBox1.Text,textBox2.Text,
+                    dateTimePicker1.Text,status
+                };
+                contas.Rows.Add(valores);
                 if (status == "Pendente")
                 {
                     Properties.Settings.Default.Pagpen = Properties.Settings.Default.Pagpen + float.Parse(textBox2.Text);
@@ -153,73 +146,114 @@ namespace Gerente
                 pago.Checked = false;
             }
         }
-        private void inicializar()
-        {
-            listView1.View = View.Details;
-
-
-
-            listView1.GridLines = true;
-
-
-        }
-        private void carregaLista()
-        {
-
-            DataTable dtable = _DataSet.Tables["Contas"];
-
-
-            listView1.Items.Clear();
-
-
-            for (int i = 0; i < dtable.Rows.Count; i++)
-            {
-                DataRow drow = dtable.Rows[i];
-
-
-                if (drow.RowState != DataRowState.Deleted)
-                {
-
-                    ListViewItem lvi = new ListViewItem(drow["Conta"].ToString());
-                    lvi.SubItems.Add(drow["Valor"].ToString());
-                    lvi.SubItems.Add(drow["Vencimento"].ToString());
-                    lvi.SubItems.Add(drow["Status"].ToString());
-
-
-
-                    listView1.Items.Add(lvi);
-                }
-            }
-        }
-        private void carregardados()
-        {
-            Connection connectDB = new Connection();
-            connectDB.conectar();
-            string Sqlite = "SELECT * FROM Contas";
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(Sqlite, connectDB.sq);
-            _DataSet = new DataSet();
-            adapter.Fill(_DataSet, "Contas");
-        }
-
+       
         private void button3_Click(object sender, EventArgs e)
         {
-            ListViewItem list = new ListViewItem();
-            list = listView1.SelectedItems[0];
-            list.SubItems.RemoveAt(2);
-            list.SubItems.Add("Pago");
-        }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(listView1.SelectedItems.Count>0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                ListViewItem list = new ListViewItem();
-                list = listView1.SelectedItems[0];
-                if (list.SubItems[3].Text == "Pendente")
+                int b = dataGridView1.SelectedRows[0].Index;
+                string celula = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                for(int i = 0; i<contas.Rows.Count; i++ )
                 {
-                    textBox4.Text = list.Text;
+                    if(i==b)
+                    {
+                        DataRow row = contas.Rows[i];
+                        row["Status"] = "Pago";
+                        float a = Properties.Settings.Default.Pagpen;
+                        float c = float.Parse(row["Valor"].ToString());
+                        float conta = c - a;
+                        Properties.Settings.Default.Pagpen = conta;
+                        Properties.Settings.Default.Save();
+                        label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+                    }
+                }
+                try
+                {
+                    Connection con = new Connection();
+                    con.conectar();
+                    string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + celula + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                    command.ExecuteNonQuery();
+                    con.desconectar();
+                    
+
+                }
+                catch(Exception err)
+                {
+                    MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                int b = dataGridView1.SelectedCells[0].RowIndex;
+                string celula = dataGridView1.SelectedCells[0].Value.ToString();
+                for (int i = 0; i < contas.Rows.Count; i++)
+                {
+                    if (i == b)
+                    {
+                        DataRow row = contas.Rows[i];
+                        row["Status"] = "Pago";
+                        float a = Properties.Settings.Default.Pagpen;
+                        float c = float.Parse(row["Valor"].ToString());
+                        float conta = c - a;
+                        Properties.Settings.Default.Pagpen = conta;
+                        Properties.Settings.Default.Save();
+                        label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+
+                    }
+                }
+                try
+                {
+                    Connection con = new Connection();
+                    con.conectar();
+                    string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + celula + "'";
+                    SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                    command.ExecuteNonQuery();
+                    con.desconectar();
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+       
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count>0)
+            {
+                textBox4.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            }
+            if(dataGridView1.SelectedCells.Count>0)
+            {
+                int b = dataGridView1.SelectedCells[0].RowIndex;
+                for(int i = 0; i<dataGridView1.Rows.Count; i++)
+                {
+                    if(i==b)
+                    {
+                        textBox4.Text = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    }
+                }
+            }
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
