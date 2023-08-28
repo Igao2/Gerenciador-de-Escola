@@ -46,6 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.Anual = new System.Windows.Forms.CheckBox();
             this.Mensal = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,9 +106,9 @@
             // 
             this.button2.Location = new System.Drawing.Point(46, 462);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 23);
+            this.button2.Size = new System.Drawing.Size(153, 40);
             this.button2.TabIndex = 8;
-            this.button2.Text = "Salvar em formato Word";
+            this.button2.Text = "Gerar Relação dos Eventos no Word";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -137,7 +138,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(153, 23);
             this.button4.TabIndex = 11;
-            this.button4.Text = "Gerar Calendário";
+            this.button4.Text = "Gerar Calendário HTML";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -189,12 +190,23 @@
             this.Mensal.UseVisualStyleBackColor = true;
             this.Mensal.CheckedChanged += new System.EventHandler(this.Mensal_CheckedChanged);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(46, 537);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(153, 23);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "Gerar Calendário no Word";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
             // Calendario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(914, 677);
             this.ControlBox = false;
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.Mensal);
             this.Controls.Add(this.Anual);
             this.Controls.Add(this.label4);
@@ -240,5 +252,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox Anual;
         private System.Windows.Forms.CheckBox Mensal;
+        private System.Windows.Forms.Button button3;
     }
 }
