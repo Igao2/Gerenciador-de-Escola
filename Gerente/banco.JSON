@@ -1,0 +1,37 @@
+[
+  {
+    "Aluno": "Jeferson Bahianoo",
+    "CPF": "59489385",
+    "Responsável": "Julio Cesar Vasconcelos",
+    "TelefonedeCasa": "35 992038808",
+    "Turma": "8º ano B"
+  },
+  {
+    "Aluno": "Airton Lopes Sanos",
+    "CPF": "456576576",
+    "Responsável": "Vivian Rodrigues Sanos",
+    "TelefonedeCasa": "35998654321",
+    "Turma": "8º ano A"
+  },
+  {
+    "Aluno": "System.Windows.Forms.TextBox, Text: sjdkfhfskjs",
+    "CPF": "System.Windows.Forms.MaskedTextBox, Text: 098,679,036-25",
+    "Responsável": "jhjdfshdjkhfdj",
+    "TelefonedeCasa": "(35)99203-8808",
+    "Turma": "8º ano B"
+  },
+  {
+    "Aluno": "teste",
+    "CPF": "111,111,111-11",
+    "Responsável": "Igor Costa",
+    "TelefonedeCasa": "(35)99203-8808",
+    "Turma": "8º ano B"
+  },
+  {
+    "Aluno": "Berenice Marcondes",
+    "CPF": "12439",
+    "Responsável": "Antonio",
+    "TelefonedeCasa": "33611511",
+    "Turma": "8º ano A"
+  }
+]

@@ -1,16 +1,21 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xceed.Document.NET;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text.Json;
+using Python.Runtime;
+using System.Text.RegularExpressions;
 
 namespace Gerente
 {
@@ -325,6 +330,42 @@ namespace Gerente
         {
             Ocorrencias oc = new Ocorrencias();
             oc.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DataTable a = new DataTable();
+            a.Columns.Add("Nome do Aluno");
+            a.Columns.Add("CPF");
+            a.Columns.Add("Nome do Responsável");
+            a.Columns.Add("Telefone de Casa");
+            a.Columns.Add("Turma");
+         
+            DataView view = new DataView(Alunos);
+
+
+            foreach (DataRowView views in view)
+            {
+                if (Regex.Match(views["Aluno"].ToString(), textBox2.Text, RegexOptions.IgnoreCase).Success)
+                {
+                    string[] dados =
+                {
+                    views["Aluno"].ToString(),
+                    views["CPf"].ToString(),
+                    views["Responsável"].ToString(),
+                    views["TelefonedeCasa"].ToString(),
+                    views["Turma"].ToString()
+
+                };
+                    a.Rows.Add(dados);
+                    dataGridView1.DataSource = a;
+                }
+
+                
+            }
+            textBox2.Text = "";
+
+
         }
     }
 }

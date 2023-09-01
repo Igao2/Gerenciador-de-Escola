@@ -86,3 +86,17 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Memory.x
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Ocorrencias.resources
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Python.Runtime.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Json.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.ValueTuple.dll
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\Python.Runtime.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Json.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.ValueTuple.xml
