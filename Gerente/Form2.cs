@@ -412,16 +412,13 @@ namespace Gerente
                     int mesNumero = mes.Key;
                     string nomeMes = mes.Value;
                     doc.InsertParagraph(nomeMes).Font("Arial").FontSize(16);
-                    Table wordTable = doc.AddTable(4, 8);
-                    wordTable.Alignment = Alignment.center;
-                    wordTable.Design = TableDesign.TableGrid;
                     DateTime dataatual = new DateTime(ano, mess, 1);
                     DateTime datafinal = dataatual.AddMonths(1).AddDays(-1);
 
                     Table calendarTable = doc.AddTable(6, 7);
                     calendarTable.Alignment = Alignment.center;
                     calendarTable.Design = TableDesign.LightGrid;
-
+                   
 
                     int row = 1;
                     int col = (int)dataatual.DayOfWeek;
@@ -432,22 +429,29 @@ namespace Gerente
                             calendarTable.InsertRow();
                             row++;
                         }
-                        calendarTable.Rows[row].Cells[col].Paragraphs.First().Append(dataatual.Day.ToString());
+                             calendarTable.Rows[row].Cells[col].Paragraphs.First().Append(dataatual.Day.ToString());
 
-
-                        foreach (DataRow rown in calendario.Rows)
-                        {
-
-                            if (rown["Datainicio"].ToString() == dataatual.ToShortDateString())
+                            foreach (DataRow rown in calendario.Rows)
                             {
-                                calendarTable.Rows[row].Cells[col].Paragraphs.First().Append("\n" + rown["Evento"].ToString());
+                                
+                                if (rown["Datainicio"].ToString() == dataatual.ToShortDateString())
+                                {
+                                    calendarTable.Rows[row].Cells[col].Paragraphs.First().Append("\n" + rown["Evento"].ToString());
+                                }
                             }
-                        }
-                        dataatual = dataatual.AddDays(1);
-                        col = (col + 1) % 7;
-                    }
 
+                          
+                        
+                       
+                            dataatual = dataatual.AddDays(1);
+                            col = (col + 1) % 7;
+                        
+
+                        
+                    }
+                   
                     doc.InsertTable(calendarTable);
+                    doc.InsertParagraph("\n \n");
                     mess++;
 
                 }

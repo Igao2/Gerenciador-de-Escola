@@ -267,11 +267,14 @@ namespace Gerente
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label12.Text = comboBox4.Text;
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Alerta al = new Alerta();
+            al.ShowDialog();
+
             openFileDialog1.Filter = "xlsx files (*.xlsx)|*.xlsx";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -365,6 +368,11 @@ namespace Gerente
             }
             textBox2.Text = "";
 
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
 
         }
     }

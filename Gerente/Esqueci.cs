@@ -60,7 +60,7 @@ namespace Gerente
                         SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
                         smtp.UseDefaultCredentials = false;
                         mail.Body = "Digite esse código para recuperar sua senha " + s;
-                        smtp.Credentials = new NetworkCredential("projetohelpy1@outlook.com", "1234@.com");
+                        smtp.Credentials = new NetworkCredential("projetohelpy1@outlook.com", "Cientista7472@");
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                         string ez = Interaction.InputBox("Digite o código que foi enviado por notificação", "Mensagem do sistema");

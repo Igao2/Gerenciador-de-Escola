@@ -27,6 +27,7 @@ namespace Gerente
             button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
             button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button4.BackColor = Color.Transparent;
+            
         }
         private DataTable professor = new DataTable();
         public string discip;
@@ -111,7 +112,7 @@ namespace Gerente
                     string sqlite = "INSERT INTO Professor(Nome,CPF,Salario,Disciplina) VALUES('" + textBox4.Text + "','" + textBox8.Text + "','" + textBox3.Text + "','" + discip + "')";
                     SQLiteCommand command = new SQLiteCommand(sqlite, con.sq);
                     command.ExecuteNonQuery();
-                    ListViewItem item = new ListViewItem(textBox4.Text);
+                    
                     string[] dados =
                     {
                         textBox4.Text,
@@ -119,7 +120,10 @@ namespace Gerente
                         textBox3.Text,
                         discip
                     };
-
+                    professor.Rows.Add(dados);
+                    textBox3.Clear();
+                    textBox4.Clear();
+                    textBox8.Clear();
 
                 }
                 catch (Exception E)
@@ -234,6 +238,7 @@ namespace Gerente
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox7.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

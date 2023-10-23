@@ -100,3 +100,4 @@ C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Enc
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Text.Json.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\bin\Debug\System.ValueTuple.xml
+C:\Users\Igor\Desktop\Projetos\Gerente Escolar\Gerente\obj\Debug\Gerente.Alerta.resources

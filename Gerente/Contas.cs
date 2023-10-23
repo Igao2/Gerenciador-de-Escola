@@ -18,6 +18,7 @@ namespace Gerente
             InitializeComponent();
         }
         private DataTable contas = new DataTable();
+        private DataTable montante = new DataTable();
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
@@ -30,27 +31,39 @@ namespace Gerente
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
-            label3.Text = "R$ " + textBox3.Text;
-            Properties.Settings.Default.Caixa = float.Parse(textBox3.Text);
-            Properties.Settings.Default.Save();
+            Connection con = new Connection();
+            string sql = "UPDATE Caixa SET Montante ='" + textBox3.Text + "'";
+            try
+            {
+                con.conectar();
+                SQLiteCommand com = new SQLiteCommand(sql, con.sq);
+                com.ExecuteNonQuery();
+                label3.Text = "R$ " + textBox3.Text;
+                con.desconectar();
+            }
+            catch(Exception E)
+            {
+                MessageBox.Show(E.ToString(), "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             textBox3.Clear();
 
         }
 
         private void Contas_Load(object sender, EventArgs e)
         {
-            label3.Text = "R$ "+Properties.Settings.Default.Caixa.ToString();
-            label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+            label3.Text = "R$ ";
+            label7.Text = "R$ ";
 
             try
             {
                 Connection con = new Connection();
                 con.conectar();
                 string sql = "SELECT * FROM Contas";
+                string Sql = "Select Montante from Caixa";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(Sql, con.sq);
                 adapter.Fill(contas);
+                ad.Fill(montante);
                 dataGridView1.DataSource = contas;
                 con.desconectar();
 
@@ -64,10 +77,13 @@ namespace Gerente
             {
                 if (row["Status"].ToString()=="Pendente")
                 {
-                    valor = valor + int.Parse(row["Valor"].ToString());
-                    Properties.Settings.Default.Pagpen = valor;
-                    Properties.Settings.Default.Save();
-                    label3.Text = "R$ " + Properties.Settings.Default.Caixa.ToString();
+                    valor+=int.Parse(row["Valor"].ToString());
+
+                    label7.Text = "R$ " + valor;
+                }
+                if (row["Status"].ToString()=="Pago")
+                {
+                    label7.Text = "R$ " + valor;
                 }
                     
             DateTime dt = new DateTime();
@@ -81,6 +97,14 @@ namespace Gerente
                 
                 
             }
+            int mont = 0;
+            foreach(DataRow dr in montante.Rows)
+            {
+                mont = int.Parse(dr["Montante"].ToString());
+                label3.Text = "R$ " + mont;
+
+            }
+           
 
 
         }
@@ -111,12 +135,7 @@ namespace Gerente
                     dateTimePicker1.Text,status
                 };
                 contas.Rows.Add(valores);
-                if (status == "Pendente")
-                {
-                    Properties.Settings.Default.Pagpen = Properties.Settings.Default.Pagpen + float.Parse(textBox2.Text);
-                    Properties.Settings.Default.Save();
-                    label7.Text = "R$ "+Properties.Settings.Default.Pagpen.ToString();
-                }
+   
 
                 pago.Checked = false;
                 pendente.Checked = false;
@@ -160,12 +179,16 @@ namespace Gerente
                     {
                         DataRow row = contas.Rows[i];
                         row["Status"] = "Pago";
-                        float a = Properties.Settings.Default.Pagpen;
-                        float c = float.Parse(row["Valor"].ToString());
-                        float conta = c - a;
-                        Properties.Settings.Default.Pagpen = conta;
-                        Properties.Settings.Default.Save();
-                        label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+                        foreach (DataRow r in montante.Rows)
+                        {
+                            float a = float.Parse(r["Montante"].ToString());
+                            float c = float.Parse(row["Valor"].ToString());
+                            float conta = c - a;
+                            label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+
+                        }
+
+
                     }
                 }
                 try
@@ -194,12 +217,14 @@ namespace Gerente
                     {
                         DataRow row = contas.Rows[i];
                         row["Status"] = "Pago";
-                        float a = Properties.Settings.Default.Pagpen;
-                        float c = float.Parse(row["Valor"].ToString());
-                        float conta = c - a;
-                        Properties.Settings.Default.Pagpen = conta;
-                        Properties.Settings.Default.Save();
-                        label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+                        foreach (DataRow r in montante.Rows)
+                        {
+                            float a = float.Parse(r["Montante"].ToString());
+                            float c = float.Parse(row["Valor"].ToString());
+                            float conta = c - a;
+                            label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
+
+                        }
 
                     }
                 }
