@@ -17,6 +17,8 @@ namespace Gerente
         {
             InitializeComponent();
         }
+        private int mon = 0;
+        private int vl = 0;
         private DataTable contas = new DataTable();
         private DataTable montante = new DataTable();
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -78,6 +80,7 @@ namespace Gerente
                 if (row["Status"].ToString()=="Pendente")
                 {
                     valor+=int.Parse(row["Valor"].ToString());
+                    vl = valor;
 
                     label7.Text = "R$ " + valor;
                 }
@@ -102,7 +105,7 @@ namespace Gerente
             {
                 mont = int.Parse(dr["Montante"].ToString());
                 label3.Text = "R$ " + mont;
-
+                mon = mont;
             }
            
 
@@ -168,81 +171,40 @@ namespace Gerente
        
         private void button3_Click(object sender, EventArgs e)
         {
-
-            if (dataGridView1.SelectedRows.Count > 0)
+            int montant = 0;
+            foreach(DataRow row in montante.Rows)
             {
-                int b = dataGridView1.SelectedRows[0].Index;
-                string celula = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                for(int i = 0; i<contas.Rows.Count; i++ )
+                montant = int.Parse(row["Montante"].ToString());
+            }
+            foreach(DataRow r in contas.Rows)
+            {
+                if (r["Conta"].ToString()==textBox4.Text)
                 {
-                    if(i==b)
+                    r["Status"] = "Pago";
+                    try
                     {
-                        DataRow row = contas.Rows[i];
-                        row["Status"] = "Pago";
-                        foreach (DataRow r in montante.Rows)
-                        {
-                            float a = float.Parse(r["Montante"].ToString());
-                            float c = float.Parse(row["Valor"].ToString());
-                            float conta = c - a;
-                            label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
-
-                        }
-
+                        Connection con = new Connection();
+                        con.conectar();
+                        string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + textBox4.Text + "'";
+                        SQLiteCommand command = new SQLiteCommand(sql, con.sq);
+                        
+                        command.ExecuteNonQuery();
+                        con.desconectar();
+                        vl -= int.Parse(r["Valor"].ToString());
+                        mon -= int.Parse(r["Valor"].ToString());
+                        label3.Text = "R$ " + mon;
+                        label7.Text = "R$ " + vl;
 
                     }
-                }
-                try
-                {
-                    Connection con = new Connection();
-                    con.conectar();
-                    string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + celula + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, con.sq);
-                    command.ExecuteNonQuery();
-                    con.desconectar();
+                    catch(Exception Err)
+                    {
+                        MessageBox.Show(Err.Message,"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    }
                     
 
                 }
-                catch(Exception err)
-                {
-                    MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
-            if (dataGridView1.SelectedCells.Count > 0)
-            {
-                int b = dataGridView1.SelectedCells[0].RowIndex;
-                string celula = dataGridView1.SelectedCells[0].Value.ToString();
-                for (int i = 0; i < contas.Rows.Count; i++)
-                {
-                    if (i == b)
-                    {
-                        DataRow row = contas.Rows[i];
-                        row["Status"] = "Pago";
-                        foreach (DataRow r in montante.Rows)
-                        {
-                            float a = float.Parse(r["Montante"].ToString());
-                            float c = float.Parse(row["Valor"].ToString());
-                            float conta = c - a;
-                            label7.Text = "R$ " + Properties.Settings.Default.Pagpen.ToString();
-
-                        }
-
-                    }
-                }
-                try
-                {
-                    Connection con = new Connection();
-                    con.conectar();
-                    string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + celula + "'";
-                    SQLiteCommand command = new SQLiteCommand(sql, con.sq);
-                    command.ExecuteNonQuery();
-                    con.desconectar();
-
-                }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            
         }
 
        

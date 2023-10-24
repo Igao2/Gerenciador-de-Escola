@@ -154,17 +154,17 @@ namespace Gerente
                 {
                     Connection con = new Connection();
                     con.conectar();
-                  
+                    string descturma = "";
                     int codTurma = 0;
-                    for(int i = 0; i<Turmas.Rows.Count;i++)
+                    foreach(DataRow r in Turmas.Rows)
                     {
-                        DataRow linhaturma = Turmas.Rows[i];
-                        if (linhaturma.ItemArray[2].ToString() == comboBox2.SelectedItem.ToString()) 
+                        if (r["descTurma"].ToString()==comboBox2.SelectedItem.ToString())
                         {
-                            codTurma = int.Parse(linhaturma.ItemArray[0].ToString());
+                            codTurma = int.Parse(r["CodTurma"].ToString());
+                            descturma = r["descTurma"].ToString();
                         }
                     }
-                    string SQL = "INSERT INTO Aluno VALUES('"+textBox1.Text+"','"+maskedTextBox2.Text+"','"+textBox3.Text+"','"+maskedTextBox1.Text+"','"+codTurma+"')";
+                    string SQL = "INSERT INTO Aluno(nomeAluno,CPF,nomeResponsavel,telefoneCasa,codTurma) VALUES('"+textBox1.Text+"','"+maskedTextBox2.Text+"','"+textBox3.Text+"','"+maskedTextBox1.Text+"','"+codTurma+"')";
                     SQLiteCommand command = new SQLiteCommand(SQL, con.sq);
                     command.ExecuteNonQuery();
                     con.desconectar();
@@ -174,7 +174,7 @@ namespace Gerente
                         maskedTextBox2.Text,
                         textBox3.Text,
                         maskedTextBox1.Text,
-                        codTurma.ToString()
+                        descturma
                     };
 
                     Alunos.Rows.Add(valores);

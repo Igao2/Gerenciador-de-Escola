@@ -252,7 +252,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(184, 75);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 25);
+            this.button3.Size = new System.Drawing.Size(100, 25);
             this.button3.TabIndex = 20;
             this.button3.Text = "Registrar";
             this.button3.UseVisualStyleBackColor = true;
