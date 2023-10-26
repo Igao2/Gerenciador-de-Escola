@@ -138,8 +138,12 @@ namespace Gerente
                     dateTimePicker1.Text,status
                 };
                 contas.Rows.Add(valores);
-   
-
+                if(status == "Pendente")
+                {
+                    vl += int.Parse(textBox2.Text);
+                    label7.Text = "R$ " + vl;
+                }
+                
                 pago.Checked = false;
                 pendente.Checked = false;
                 textBox1.Clear();

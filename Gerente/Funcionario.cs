@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +30,11 @@ namespace Gerente
             button4.BackColor = Color.Transparent;
             
         }
+        private string segunda = "N";
+        private string terca = "N";
+        private string quarta = "N";
+        private string quinta = "N";
+        private string sexta = "N";
         private DataTable professor = new DataTable();
         public string discip;
         private DataTable disciplinas = new DataTable();
@@ -112,7 +118,18 @@ namespace Gerente
                     string sqlite = "INSERT INTO Professor(Nome,CPF,Salario,Disciplina) VALUES('" + textBox4.Text + "','" + textBox8.Text + "','" + textBox3.Text + "','" + discip + "')";
                     SQLiteCommand command = new SQLiteCommand(sqlite, con.sq);
                     command.ExecuteNonQuery();
-                    
+                    string sql = "SELECT * FROM Professor WHERE CodProfessor = LAST_INSERT_ROWID()";
+                    SQLiteDataAdapter ad = new SQLiteDataAdapter(sql, con.sq);
+                    DataTable b = new DataTable();
+                    ad.Fill(b);
+                    foreach(DataRow r in b.Rows)
+                    {
+                        int cod = int.Parse(r["CodProfessor"].ToString());
+                        string SQL = "INSERT INTO Disponibilidade_Professor VALUES('" + cod + "','" + segunda + "','" + terca + "','" + quarta + "','" + quinta + "','" + sexta + "')";
+                        SQLiteCommand command1 = new SQLiteCommand(SQL, con.sq);
+                        command1.ExecuteNonQuery();
+                    }
+
                     string[] dados =
                     {
                         textBox4.Text,
@@ -124,7 +141,7 @@ namespace Gerente
                     textBox3.Clear();
                     textBox4.Clear();
                     textBox8.Clear();
-
+                    con.desconectar();
                 }
                 catch (Exception E)
                 {
@@ -230,6 +247,54 @@ namespace Gerente
             
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                segunda = "S";
+            }
+            else
+            {
+                segunda = "N";
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                terca = "S";
+            }
+            else
+            {
+                terca = "N";
+            }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked)
+            {
+                quinta = "S";
+            }
+            else
+            {
+                quinta = "N";
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked)
+            {
+                sexta = "S";
+            }
+            else
+            {
+                sexta = "N";
+            }
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             
@@ -244,6 +309,18 @@ namespace Gerente
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked)
+            {
+                quarta = "S";
+            }
+            else
+            {
+                quarta = "N";
+            }
         }
     }
 }

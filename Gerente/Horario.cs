@@ -198,6 +198,32 @@ namespace Gerente
           
 
          }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Connection con = new Connection();
+            try
+            {
+                con.conectar();
+                string sql = "INSERT INTO Matriz VALUES('" + textBox5.Text + "','" + textBox1.Text + "','" + textBox6.Text + "')";
+                SQLiteCommand com = new SQLiteCommand(sql, con.sq);
+                com.ExecuteNonQuery();
+                string[] valores =
+                {
+                    textBox5.Text,
+                    textBox1.Text,
+                    textBox6.Text
+                };
+                matriz.Rows.Add(valores);
+                textBox6.Clear();
+                textBox5.Clear();
+                textBox1.Clear();
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 
        

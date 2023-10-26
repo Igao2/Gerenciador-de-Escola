@@ -101,6 +101,9 @@ namespace Gerente
             button4.Show();
           
             Ver(true);
+            maskedTextBox1.Clear();
+            maskedTextBox2.Clear();
+            textBox1.Clear();
         }
         private void preencher(int numero)
         {
@@ -304,6 +307,7 @@ namespace Gerente
 
                 }
             }
+
         }
         private void Ver(bool inicio)
         {
