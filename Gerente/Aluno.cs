@@ -201,11 +201,19 @@ namespace Gerente
                 {
                     Connection con = new Connection();
                     con.conectar();
-                    int a = int.Parse(textBox5.Text);
+                    int a = int.Parse(textBox6.Text);
                     int b = int.Parse(comboBox4.SelectedItem.ToString());
 
-                    string SQL = "INSERT INTO Turma Values('"+a+"','"+comboBox4.Text+"','" + textBox5.Text + "','"+periodo+"')";
+                    string SQL = "INSERT INTO Turma Values('"+a+"','"+b+"','" + textBox5.Text + "','"+periodo+"')";
                     SQLiteCommand command = new SQLiteCommand(SQL, con.sq);
+                    string[] dados =
+                    {
+                        a.ToString(),
+                        b.ToString(),
+                        textBox5.Text,
+                        periodo
+                    };
+                    Turmas.Rows.Add(dados);
                     command.ExecuteNonQuery();
                     con.desconectar();
 

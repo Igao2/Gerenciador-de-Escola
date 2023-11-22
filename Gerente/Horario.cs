@@ -224,6 +224,33 @@ namespace Gerente
                 MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Connection con = new Connection();
+            try
+            {
+                con.conectar();
+                int a = int.Parse(comboBox1.Text);
+                 string b = comboBox3.Text;
+
+                foreach(DataRow r in disciplinas.Rows)
+                {
+                    if(b == r["NomeDisciplina"].ToString())
+                    {
+                        b = r["CodDisciplina"].ToString();
+                    }
+                }
+                string sql = "INSERT INTO GradeCurricular VALUES('" + a + "','" + b + "')";
+                SQLiteCommand com = new SQLiteCommand(sql, con.sq);
+                com.ExecuteNonQuery();
+                
+            }
+            catch (Exception err)
+            {
+               MessageBox.Show(err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 
        

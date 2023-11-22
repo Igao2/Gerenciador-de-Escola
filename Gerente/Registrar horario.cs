@@ -380,7 +380,7 @@ namespace Gerente
             {
                 Connection con = new Connection();
                 con.conectar();
-
+                
                 string sql = "Select Professor.Nome,Disciplinas.NomeDisciplina as Disciplina,Disciplinas.cargaHoraria as CH,Disponibilidade_Professor.Segunda,\r\nDisponibilidade_Professor.Terca,Disponibilidade_Professor.Quarta,Disponibilidade_Professor.Quinta,Disponibilidade_Professor.Sexta \r\nfrom Turma \r\ninner join GradeCurricular on GradeCurricular.CodMatriz = Turma.CodMatriz\r\ninner join Disciplinas on Disciplinas.CodDisciplina = GradeCurricular.CodDisciplina\r\ninner join Professor on Professor.Disciplina = Disciplinas.CodDisciplina\r\ninner join Disponibilidade_Professor on Disponibilidade_Professor.CodProfessor = Professor.CodProfessor\r\nWhere descTurma = '"+comboBox1.Text+"' Order By Disciplinas.NomeDisciplina";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, con.sq);
                 adapter.Fill(disponbilidade);

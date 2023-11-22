@@ -261,6 +261,7 @@
             this.button5.TabIndex = 80;
             this.button5.Text = "Inserir na Matriz";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // groupBox3
             // 

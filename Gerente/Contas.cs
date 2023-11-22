@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.Engineering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -184,26 +185,34 @@ namespace Gerente
             {
                 if (r["Conta"].ToString()==textBox4.Text)
                 {
-                    r["Status"] = "Pago";
-                    try
+                    if (r["Status"] == "Pendente")
                     {
-                        Connection con = new Connection();
-                        con.conectar();
-                        string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + textBox4.Text + "'";
-                        SQLiteCommand command = new SQLiteCommand(sql, con.sq);
-                        
-                        command.ExecuteNonQuery();
-                        con.desconectar();
-                        vl -= int.Parse(r["Valor"].ToString());
-                        mon -= int.Parse(r["Valor"].ToString());
-                        label3.Text = "R$ " + mon;
-                        label7.Text = "R$ " + vl;
+                        r["Status"] = "Pago";
+                        try
+                        {
+                            Connection con = new Connection();
+                            con.conectar();
+                            string sql = "UPDATE Contas SET Status = 'Pago' WHERE Conta = '" + textBox4.Text + "'";
+                            SQLiteCommand command = new SQLiteCommand(sql, con.sq);
 
+                            command.ExecuteNonQuery();
+                            con.desconectar();
+                            vl = vl - int.Parse(r["Valor"].ToString());
+                            mon = mon - int.Parse(r["Valor"].ToString());
+                            label3.Text = "R$ " + mon;
+                            label7.Text = "R$ " + vl;
+
+                        }
+                        catch (Exception Err)
+                        {
+                            MessageBox.Show(Err.Message, "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch(Exception Err)
+                    else
                     {
-                        MessageBox.Show(Err.Message,"Alerta do Sistema",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("A conta já está registrada como paga!!", "Alerta do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
+                    
                     
 
                 }
