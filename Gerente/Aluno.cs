@@ -304,7 +304,7 @@ namespace Gerente
                     {
                         Connection con = new Connection();
                         con.conectar();
-                        string sql = "INSERT INTO Aluno VALUES ('" + row.ItemArray[0].ToString() + "','" + row.ItemArray[1].ToString() + "','" + row.ItemArray[2].ToString() + "','" + row.ItemArray[3].ToString() + "','" + row.ItemArray[4].ToString() + "')";
+                        string sql = "INSERT INTO Aluno(nomeAluno,CPF,nomeResponsavel,telefoneCasa,codTurma) VALUES ('" + row.ItemArray[0].ToString() + "','" + row.ItemArray[1].ToString() + "','" + row.ItemArray[2].ToString() + "','" + row.ItemArray[3].ToString() + "','" + row.ItemArray[4].ToString() + "')";
                         SQLiteCommand comm = new SQLiteCommand(sql, con.sq);
                         comm.ExecuteNonQuery();
                         string[] valores =
